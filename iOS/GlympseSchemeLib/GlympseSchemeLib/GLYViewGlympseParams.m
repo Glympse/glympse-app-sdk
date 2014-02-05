@@ -33,20 +33,34 @@
 
 - (BOOL)isVaid
 {
-    // TODO:
-    return NO;
+    return YES;
 }
 
 - (NSURL*)toGlympseURL;
 {
-    // TODO:    
-    return nil;
+    NSMutableString* uriString = [NSMutableString string];
+    [uriString appendString:GLYLaunchUriScheme];
+    [self appendCodes:uriString];
+    return [NSURL URLWithString:uriString];
+
 }
 
 - (NSURL*)toWebURL
 {
-    // TODO:
-    return nil;
+    NSMutableString* uriString = [NSMutableString string];
+    [uriString appendString:GLYWebUri];
+    [self appendCodes:uriString];
+    return [NSURL URLWithString:uriString];
+}
+
+- (void)appendCodes:(NSMutableString*)uriString
+{
+    char arg = '?';
+    for ( NSString* code in _codes )
+    {
+        [uriString appendFormat:@"%c%@", arg, code];
+        arg = '&';
+    }
 }
 
 @end

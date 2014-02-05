@@ -8,6 +8,7 @@
 
 NSString* GLYCreateUriScheme = @"glympse:";
 NSString* GLYLaunchUriScheme = @"glympse:";
+NSString* GLYWebUri = @"http://glympse.com/";
 NSString* GLYGlympseHostPattern = @"glympse.";
 
 @implementation GLYUriParser

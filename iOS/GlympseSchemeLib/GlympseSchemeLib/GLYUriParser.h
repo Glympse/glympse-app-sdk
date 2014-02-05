@@ -8,6 +8,7 @@
 
 extern NSString* GLYCreateUriScheme;
 extern NSString* GLYLaunchUriScheme;
+extern NSString* GLYWebUri;
 
 @interface GLYUriParser : NSObject
 
