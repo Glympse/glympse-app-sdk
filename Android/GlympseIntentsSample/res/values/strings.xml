@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <string name="app_name">Glympse Intent Demo</string>
+    <string name="create_glympse_title">Create Glympse</string>
+    <string name="create_glympse_button">Create glympse</string>
+    <string name="view_glympse_title">View Glympse</string>
+    <string name="view_glympse_button">View glympses found in text</string>
+    <string name="brand_prompt">Brand:</string>
+    <string name="brand_default">chaton</string>
+    <string name="subtype_prompt">Subtype:</string>
+    <string name="subtype_default">chaton</string>
+    <string name="duration_prompt">Initial minutes:</string>
+    <string name="duration_default">15</string>
+    <string name="buffer_prompt">Text:</string>
+    <string name="buffer_default">Sample text message that contains one or more Glympse URLs, such as http://glympse.com/BOT-002.</string>
+    
+</resources>
