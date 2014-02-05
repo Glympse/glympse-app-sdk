@@ -10,10 +10,12 @@
 
 - (id)initWithBuffer:(NSString*)buffer;
 
-@property (readonly) NSArray* glympses;
-@property (readonly) NSArray* requests;
-@property (readonly) NSArray* groups;
+@property (readonly) NSMutableArray* glympses;
+@property (readonly) NSMutableArray* requests;
+@property (readonly) NSMutableArray* groups;
 
 - (BOOL)hasGlympseOrGroup;
+
++ (NSDictionary*)parseQueryString:(NSString*)query;
 
 @end
