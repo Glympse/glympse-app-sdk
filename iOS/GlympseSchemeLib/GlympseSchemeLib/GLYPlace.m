@@ -55,4 +55,9 @@ static NSString* GLYPlaceLongitude = @"longitude";
     return jsonString;
 }
 
+- (BOOL)isValid
+{
+    return YES;
+}
+
 @end

@@ -156,6 +156,15 @@ static const int GLYMaximumCodeLength = 128;
     return result;
 }
 
+#pragma mark - Data formats
+
++ (NSString*)toJsonString:(id)jsonObject
+{
+    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:jsonObject options:0 error:NULL];
+    NSString* jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+    return jsonString;
+}
+
 #pragma mark - URI helpers
 
 + (NSDictionary*)parseQueryString:(NSString*)query
@@ -184,6 +193,16 @@ static const int GLYMaximumCodeLength = 128;
         }
     }
     return dict;
+}
+
++ (NSString*)urlEncode:(NSString*)str
+{
+    return [str stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+}
+
++ (NSString*)urlDecode:(NSString*)str
+{
+    return [str stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
 }
 
 @end

@@ -5,6 +5,7 @@
 //------------------------------------------------------------------------------
 
 #import "GLYRecipient.h"
+#import "GLYUriParser.h"
 
 NSString* GLYRecipientTypeApp = @"app";
 NSString* GLYRecipientTypeLink = @"link";
@@ -69,7 +70,7 @@ static NSString* GLYRecipientUrl = @"url";
     return self;
 }
 
-- (NSString*)toString
+- (NSDictionary*)toObject
 {
     NSMutableDictionary* jsonObject = [[NSMutableDictionary alloc] init];
     
@@ -97,10 +98,37 @@ static NSString* GLYRecipientUrl = @"url";
     {
         [jsonObject setObject:_url forKey:GLYRecipientUrl];
     }
-    
-    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:jsonObject options:0 error:NULL];
-    NSString* jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    return jsonString;
+
+    return jsonObject;
+}
+
+- (NSString*)toString
+{
+    NSDictionary* jsonObject = [self toObject];
+    return [GLYUriParser toJsonString:jsonObject];
+}
+
++ (NSString*)toString:(NSArray*)recipients
+{
+    NSMutableArray* recipientObjects = [[NSMutableArray alloc] init];
+    for ( GLYRecipient* recipient in recipients )
+    {
+        if ( ![recipient isValid] )
+        {
+            continue;
+        }
+        [recipientObjects addObject:[recipient toObject]];
+    }
+    if ( recipientObjects.count <= 0 )
+    {
+        return nil;
+    }
+    return [GLYUriParser toJsonString:recipientObjects];
+}
+
+- (BOOL)isValid
+{
+    return YES;
 }
 
 @end

@@ -16,6 +16,8 @@
 
 - (NSString*)toString;
 
+- (BOOL)isValid;
+
 @property (readonly) NSString* name;
 @property (readonly) double latitude;
 @property (readonly) double longitude;

@@ -26,7 +26,13 @@ extern NSString* GLYRecipientTypeEmail;
 
 - (id)initWithString:(NSString*)jsonString;
 
+- (NSDictionary*)toObject;
+
 - (NSString*)toString;
+
+- (BOOL)isValid;
+
++ (NSString*)toString:(NSArray*)recipients;
 
 @property (readonly) NSString* type;
 @property (readonly) NSString* subtype;

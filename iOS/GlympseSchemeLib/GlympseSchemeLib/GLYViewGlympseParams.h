@@ -16,7 +16,7 @@
 
 - (void)addAllGlympsesAndGroups:(GLYUriParser*)parseBufferResult;
 
-- (BOOL)isVaid;
+- (BOOL)isValid;
 
 - (NSURL*)toGlympseURL;
 

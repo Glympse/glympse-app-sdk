@@ -24,6 +24,12 @@ extern NSString* GLYWebUri;
 
 + (NSURL*)glympseLaunchUri;
 
++ (NSString*)toJsonString:(id)jsonObject;
+
 + (NSDictionary*)parseQueryString:(NSString*)query;
+
++ (NSString*)urlEncode:(NSString*)str;
+
++ (NSString*)urlDecode:(NSString*)str;
 
 @end

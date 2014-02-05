@@ -29,7 +29,7 @@
 {
     // Check if Glympse application is installed and exposes proper interface for creating Glympses externally.
     // Also make sure we were passed a create glympse params and that it looks valid.
-    if ( ![GlympseApp canCreateGlympse] || ![params isVaid] )
+    if ( ![GlympseApp canCreateGlympse] || ![params isValid] )
     {
         return NO;
     }
@@ -41,7 +41,7 @@
 + (BOOL)viewGlympse:(BOOL)includeWeb params:(GLYViewGlympseParams*)params
 {
     // Also make sure we were passed a view glympse params and that it looks valid.
-    if ( ![params isVaid] )
+    if ( ![params isValid] )
     {
         return NO;
     }

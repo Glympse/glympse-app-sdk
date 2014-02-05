@@ -31,7 +31,7 @@
     [_codes addObjectsFromArray:parseBufferResult.groups];
 }
 
-- (BOOL)isVaid
+- (BOOL)isValid
 {
     return YES;
 }

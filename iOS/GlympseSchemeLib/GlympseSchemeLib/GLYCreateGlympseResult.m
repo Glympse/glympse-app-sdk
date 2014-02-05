@@ -20,8 +20,8 @@ NSString* GLYReurnUriDuration = @"gly_dur";
         NSURL* url = [NSURL URLWithString:uriString];
         NSDictionary* arguments = [GLYUriParser parseQueryString:url.query];
         
-        _url = (NSString*)[arguments objectForKey:GLYReurnUriUrl];
-        _message = (NSString*)[arguments objectForKey:GLYReurnUriMessage];
+        _url = [GLYUriParser urlDecode:(NSString*)[arguments objectForKey:GLYReurnUriUrl]];
+        _message = [GLYUriParser urlDecode:(NSString*)[arguments objectForKey:GLYReurnUriMessage]];
         _duration = [(NSString*)[arguments objectForKey:GLYReurnUriDuration] longLongValue];
     }
     return self;

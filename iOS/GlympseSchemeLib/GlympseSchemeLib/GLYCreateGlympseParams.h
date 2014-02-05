@@ -22,13 +22,13 @@ extern const long long GLYFlagDestinationHidden;
 
 @property long long flags;
 @property long long duration;
-@property NSArray* recipients;
+@property (readonly) NSMutableArray* recipients;
 @property NSString* message;
 @property GLYPlace* destination;
 @property NSString* returnUrl;
 @property NSString* returnCancelUrl;
 
-- (BOOL)isVaid;
+- (BOOL)isValid;
 
 - (NSURL*)toGlympseURL;
 
