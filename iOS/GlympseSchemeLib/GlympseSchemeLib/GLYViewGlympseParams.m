@@ -27,7 +27,26 @@
 
 - (void)addAllGlympsesAndGroups:(GLYUriParser*)parseBufferResult
 {
+    [_codes addObjectsFromArray:parseBufferResult.glympses];
+    [_codes addObjectsFromArray:parseBufferResult.groups];
+}
+
+- (BOOL)isVaid
+{
     // TODO:
+    return NO;
+}
+
+- (NSURL*)toGlympseURL;
+{
+    // TODO:    
+    return nil;
+}
+
+- (NSURL*)toWebURL
+{
+    // TODO:
+    return nil;
 }
 
 @end

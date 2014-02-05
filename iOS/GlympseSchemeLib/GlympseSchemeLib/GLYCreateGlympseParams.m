@@ -30,4 +30,16 @@ const static long long GLYDefaultDuration = 15 * 60 * 1000;
     return self;
 }
 
+- (BOOL)isVaid
+{
+    // TODO:
+    return NO;
+}
+
+- (NSURL*)toGlympseURL;
+{
+    // TODO:
+    return nil;
+}
+
 @end

@@ -6,6 +6,9 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString* GLYCreateUriScheme;
+extern NSString* GLYLaunchUriScheme;
+
 @interface GLYUriParser : NSObject
 
 - (id)initWithBuffer:(NSString*)buffer;
@@ -15,6 +18,10 @@
 @property (readonly) NSMutableArray* groups;
 
 - (BOOL)hasGlympseOrGroup;
+
++ (NSURL*)glympseCreateUri;
+
++ (NSURL*)glympseLaunchUri;
 
 + (NSDictionary*)parseQueryString:(NSString*)query;
 

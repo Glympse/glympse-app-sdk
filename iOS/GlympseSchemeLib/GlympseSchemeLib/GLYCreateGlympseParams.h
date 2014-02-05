@@ -28,4 +28,8 @@ extern const long long GLYFlagDestinationHidden;
 @property NSString* returnUrl;
 @property NSString* returnCancelUrl;
 
+- (BOOL)isVaid;
+
+- (NSURL*)toGlympseURL;
+
 @end

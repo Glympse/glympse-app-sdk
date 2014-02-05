@@ -10,10 +10,16 @@
 
 @interface GLYViewGlympseParams : NSObject
 
+@property (readonly) NSMutableArray* codes;
+
 - (void)addGlympseOrGroup:(NSString*)code;
 
 - (void)addAllGlympsesAndGroups:(GLYUriParser*)parseBufferResult;
 
-@property (readonly) NSMutableArray* codes;
+- (BOOL)isVaid;
+
+- (NSURL*)toGlympseURL;
+
+- (NSURL*)toWebURL;
 
 @end

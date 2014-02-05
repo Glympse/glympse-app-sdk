@@ -6,7 +6,9 @@
 
 #import "GLYUriParser.h"
 
-static NSString* GLYGlympseHostPattern = @"glympse.";
+NSString* GLYCreateUriScheme = @"glympse:";
+NSString* GLYLaunchUriScheme = @"glympse:";
+NSString* GLYGlympseHostPattern = @"glympse.";
 
 @implementation GLYUriParser
 
@@ -26,6 +28,16 @@ static NSString* GLYGlympseHostPattern = @"glympse.";
 - (BOOL)hasGlympseOrGroup
 {
     return ( _glympses.count > 0 ) || ( _groups.count > 0 );
+}
+
++ (NSURL*)glympseCreateUri
+{
+    return [NSURL URLWithString:GLYCreateUriScheme];
+}
+
++ (NSURL*)glympseLaunchUri
+{
+    return [NSURL URLWithString:GLYLaunchUriScheme];
 }
 
 - (void)extractUris:(NSString*)buffer

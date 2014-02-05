@@ -26,11 +26,11 @@
 /**
  * Launches Glympse application in "create a glympse" mode.
  */
-+ (BOOL)createGlympse:(GLYCreateGlympseParams*)createGlympseParams;
++ (BOOL)createGlympse:(GLYCreateGlympseParams*)params;
 
 /**
  * Launches Glympse application in "view a glympse" mode.
  */
-+ (BOOL)viewGlympse:(BOOL)includeWeb params:(GLYViewGlympseParams*)viewGlympseParams;
++ (BOOL)viewGlympse:(BOOL)includeWeb params:(GLYViewGlympseParams*)params;
 
 @end
