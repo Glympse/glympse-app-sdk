@@ -6,6 +6,11 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString* GLYRecipientTypeApp;
+extern NSString* GLYRecipientTypeLink;
+extern NSString* GLYRecipientTypeSms;
+extern NSString* GLYRecipientTypeEmail;
+
 @interface GLYRecipient : NSObject
 
 - (id)initWithType:(NSString*)type

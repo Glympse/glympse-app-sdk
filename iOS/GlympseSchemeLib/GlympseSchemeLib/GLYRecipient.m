@@ -6,6 +6,11 @@
 
 #import "GLYRecipient.h"
 
+NSString* GLYRecipientTypeApp = @"app";
+NSString* GLYRecipientTypeLink = @"link";
+NSString* GLYRecipientTypeSms = @"sms";
+NSString* GLYRecipientTypeEmail = @"email";
+
 static NSString* GLYRecipientType = @"type";
 static NSString* GLYRecipientSubtype = @"subtype";
 static NSString* GLYRecipientBrand = @"brand";
