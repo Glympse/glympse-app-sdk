@@ -38,6 +38,15 @@ public class Recipient
         _name    = name;
         _address = address;
     }
+    
+    public Recipient(String type, String name, String address, String url)
+    {
+        _type    = type;
+        _type    = type;
+        _name    = name;
+        _address = address;
+        _url = url;        
+    }    
 
     protected Recipient(String json)
     {
