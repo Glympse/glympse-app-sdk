@@ -9,7 +9,7 @@
 #import "GLYCreateGlympseParams.h"
 #import "GLYViewGlympseParams.h"
 
-@interface GlympseApp : NSObject
+@interface GLYGlympseApp : NSObject
 
 /**
  * Returns true if we can either create a Glympse or install Glympse on this system.

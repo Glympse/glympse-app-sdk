@@ -11,6 +11,7 @@
 extern const long long GLYFlagRecipientsEditable;
 extern const long long GLYFlagRecipientsReadOnly;
 extern const long long GLYFlagRecipientsDeleteOnly;
+extern const long long GLYFlagRecipientsHidden;
 extern const long long GLYFlagMessageEditable;
 extern const long long GLYFlagMessageReadOnly;
 extern const long long GLYFlagMessageDeleteOnly;

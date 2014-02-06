@@ -11,6 +11,7 @@
 const long long GLYFlagRecipientsEditable           = 0x0000000000000000L;
 const long long GLYFlagRecipientsReadOnly           = 0x0000000000000001L;
 const long long GLYFlagRecipientsDeleteOnly         = 0x0000000000000002L;
+const long long GLYFlagRecipientsHidden             = 0x0000000000000004L;
 const long long GLYFlagMessageEditable              = 0x0000000000000000L;
 const long long GLYFlagMessageReadOnly              = 0x0000000000000010L;
 const long long GLYFlagMessageDeleteOnly            = 0x0000000000000020L;
