@@ -77,7 +77,7 @@ public class GlympseApp
             {
                 BroadcastReceiver receiver = new GlympseIntentsReceiver(status, events);
                 IntentFilter filter = new IntentFilter(callbackAction);
-                context.registerReceiver(receiver, filter);
+                context.getApplicationContext().registerReceiver(receiver, filter);
             }
             
             // Launch the  activity.
