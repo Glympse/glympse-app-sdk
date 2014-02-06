@@ -45,31 +45,52 @@ NSString* GLYGlympseHostPattern = @"glympse.";
 {
     NSDataDetector* detector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingTypeLink error:nil];
     NSArray* matches = [detector matchesInString:buffer options:0 range:NSMakeRange(0, [buffer length])];
-    for ( NSString* urlString in matches )
+    for ( NSTextCheckingResult* result in matches )
     {
-        [self processUrl:urlString];
+        [self processUrl:result.URL];
     }
 }
 
-- (void)processUrl:(NSString*)urlString
+- (void)processUrl:(NSURL*)url
 {
-    NSURL* url = [NSURL URLWithString:urlString];
+    if ( nil == url )
+    {
+        return;
+    }
+    
     if ( NSNotFound == [url.host rangeOfString:GLYGlympseHostPattern].location )
     {
         return;
     }
     
-    NSDictionary* arguments = [GLYUriParser parseQueryString:url.query];
-    for ( NSString* argument in [arguments allKeys] )
+    // Check query component of URL for possible invite codes
+    NSString *query = url.query;
+    if ( nil != query )
     {
-        [self processCode:argument];
+        NSDictionary* arguments = [GLYUriParser parseQueryString:query];
+        for ( NSString* argument in [arguments allKeys] )
+        {
+            [self processCode:argument];
+        }
+    }
+    
+    // Check last path component of URL for possible invite code
+    NSString *lastComponent = [url.pathComponents lastObject];
+    if ( nil != lastComponent && ![lastComponent isEqualToString:@"/"] )
+    {
+        [self processCode:lastComponent];
     }
 }
 
 - (void)processCode:(NSString*)code
 {
+    if ( nil == code )
+    {
+        return;
+    }
+    
     // Check for a group name.
-    if ( 0 == [code rangeOfString:@"!"].location )
+    if ( [code hasPrefix:@"!"] )
     {
         [_groups addObject:code];
     }
