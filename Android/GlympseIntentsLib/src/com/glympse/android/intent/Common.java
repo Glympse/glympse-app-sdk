@@ -43,6 +43,6 @@ public class Common
     public static final String GLYMPSE_EVENT_CREATING           = "creating";
     public static final String GLYMPSE_EVENT_CREATED            = "created";
     public static final String GLYMPSE_EVENT_FAILED_TO_CREATE   = "failed_to_create";
-    public static final String GLYMPSE_EVENT_DONE_SENDING       = "sone_sending";
+    public static final String GLYMPSE_EVENT_DONE_SENDING       = "done_sending";
     public static final String GLYMPSE_EVENT_DURATION_CHANGED   = "duration_changed";    
 }
