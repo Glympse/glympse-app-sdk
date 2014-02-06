@@ -5,7 +5,7 @@
 //------------------------------------------------------------------------------
 
 #import "MainViewController.h"
-#import "GlympseApp.h"
+#import "GLYGlympseApp.h"
 #import "GLYRecipient.h"
 
 @implementation MainViewController
@@ -28,8 +28,8 @@
     [super viewDidLoad];
     
     // If for some reason we cannot create and/or view a Glympse, then we disable the buttons for those actions.
-    self.createButton.enabled = [GlympseApp canCreateGlympse];
-    self.viewButton.enabled = [GlympseApp canViewGlympse:YES];
+    self.createButton.enabled = [GLYGlympseApp canCreateGlympse];
+    self.viewButton.enabled = [GLYGlympseApp canViewGlympse:YES];
 }
 
 - (void)viewDidUnload
@@ -60,7 +60,7 @@
     glympseCreateParams.duration = (minutes * 60 * 1000);
     
     // Invoke the Glympse-app to create this Glympse, if possible, with these parameters
-    if ( ![GlympseApp createGlympse:glympseCreateParams] )
+    if ( ![GLYGlympseApp createGlympse:glympseCreateParams] )
     {
         [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Glympse failed to handle the passed Create parameters."
                                    delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];
@@ -82,7 +82,7 @@
 
         
         // Generate a "view a glympse" Intent and start the activity for it.
-        if ( ![GlympseApp viewGlympse:YES params:glympseViewParams] )
+        if ( ![GLYGlympseApp viewGlympse:YES params:glympseViewParams] )
         {
             [[[UIAlertView alloc] initWithTitle:@"Error" message:@"Glympse failed to handle the passed View parameters."
                                        delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];

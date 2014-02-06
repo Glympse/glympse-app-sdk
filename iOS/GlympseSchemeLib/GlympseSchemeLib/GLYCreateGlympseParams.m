@@ -35,7 +35,7 @@ NSString* GLYCreateUriReturnCancelUrl = @"ret_cancel_url";
 
 @implementation GLYCreateGlympseParams
 
-- (id)initWithBuffer:(NSString*)buffer
+- (id)init
 {
     if ( self = [super init] )
     {

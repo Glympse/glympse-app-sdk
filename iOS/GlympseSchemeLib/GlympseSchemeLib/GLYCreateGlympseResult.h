@@ -6,8 +6,8 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString* GLYReurnUriRecipients;
-extern NSString* GLYReurnUriDuration;
+extern NSString* GLYReturnUriRecipients;
+extern NSString* GLYReturnUriDuration;
 
 @interface GLYCreateGlympseResult : NSObject
 
@@ -16,6 +16,6 @@ extern NSString* GLYReurnUriDuration;
 
 - (id)initWithUriString:(NSString*)uriString;
 
-- (NSURL*)toUrl:(NSString*)returnUrl recipients:(NSArray*)recipients duration:(long long)duration;
++ (NSURL*)toUrl:(NSString*)returnUrl recipients:(NSArray*)recipients duration:(long long)duration;
 
 @end

@@ -8,8 +8,8 @@
 #import "GLYUriParser.h"
 #import "GLYRecipient.h"
 
-NSString* GLYReurnUriRecipients = @"gly_recipients";
-NSString* GLYReurnUriDuration = @"gly_duration";
+NSString* GLYReturnUriRecipients = @"gly_recipients";
+NSString* GLYReturnUriDuration = @"gly_duration";
 
 @implementation GLYCreateGlympseResult
 
@@ -20,18 +20,18 @@ NSString* GLYReurnUriDuration = @"gly_duration";
         NSURL* url = [NSURL URLWithString:uriString];
         NSDictionary* arguments = [GLYUriParser parseQueryString:url.query];
         
-        _recipients = [GLYRecipient fromString:[arguments objectForKey:GLYReurnUriRecipients]];
-        _duration = [(NSString*)[arguments objectForKey:GLYReurnUriDuration] longLongValue];
+        _recipients = [GLYRecipient fromString:[arguments objectForKey:GLYReturnUriDuration]];
+        _duration = [(NSString*)[arguments objectForKey:GLYReturnUriDuration] longLongValue];
     }
     return self;
 }
 
-- (NSURL*)toUrl:(NSString*)returnUrl recipients:(NSArray*)recipients duration:(long long)duration;
++ (NSURL*)toUrl:(NSString*)returnUrl recipients:(NSArray*)recipients duration:(long long)duration;
 {
     NSMutableString* urlStr = [[NSMutableString alloc] initWithString:returnUrl];
     char separator = ( NSNotFound == [returnUrl rangeOfString:@"?"].location ) ? '?' : '&';
-    [urlStr appendFormat:@"%c%@=%@", separator, GLYReurnUriRecipients, [GLYRecipient toString:recipients]];
-    [urlStr appendFormat:@"&%@=%lld", GLYReurnUriDuration, duration];
+    [urlStr appendFormat:@"%c%@=%@", separator, GLYReturnUriDuration, [GLYRecipient toString:recipients]];
+    [urlStr appendFormat:@"&%@=%lld", GLYReturnUriDuration, duration];
     return [NSURL URLWithString:urlStr];
 }
 
