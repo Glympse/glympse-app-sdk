@@ -20,7 +20,7 @@ NSString* GLYReturnUriDuration = @"gly_duration";
         NSURL* url = [NSURL URLWithString:uriString];
         NSDictionary* arguments = [GLYUriParser parseQueryString:url.query];
         
-        _recipients = [GLYRecipient fromString:[arguments objectForKey:GLYReturnUriDuration]];
+        _recipients = [GLYRecipient fromString:[arguments objectForKey:GLYReturnUriRecipients]];
         _duration = [(NSString*)[arguments objectForKey:GLYReturnUriDuration] longLongValue];
     }
     return self;

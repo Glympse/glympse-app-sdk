@@ -20,7 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		AA8D164318A2CE65002E342C /* GlympseSchemeSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GlympseSchemeSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA8D164318A2CE65002E342C /* GlyScheme.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GlyScheme.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA8D164618A2CE65002E342C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		AA8D164818A2CE65002E342C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		AA8D164A18A2CE65002E342C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -31,7 +31,7 @@
 		AA8D165518A2CE65002E342C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		AA8D165618A2CE65002E342C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		AA8D165818A2CE65002E342C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		AA8D167518A2CFA7002E342C /* libGlympseSchemeLib.a */ = {isa = PBXFileReference; lastKnownFileType = file; name = libGlympseSchemeLib.a; path = "../GlympseSchemeLib/build/Debug-iphoneos/libGlympseSchemeLib.a"; sourceTree = "<group>"; };
+		AA8D167518A2CFA7002E342C /* libGlympseSchemeLib.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGlympseSchemeLib.a; path = "../GlympseSchemeLib/build/Debug-iphoneos/libGlympseSchemeLib.a"; sourceTree = "<group>"; };
 		AA8D167718A2D43A002E342C /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		AA8D167818A2D43A002E342C /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		AA8D167918A2D43A002E342C /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
@@ -64,7 +64,7 @@
 		AA8D164418A2CE65002E342C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AA8D164318A2CE65002E342C /* GlympseSchemeSample.app */,
+				AA8D164318A2CE65002E342C /* GlyScheme.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -122,7 +122,7 @@
 			);
 			name = GlympseSchemeSample;
 			productName = GlympseSchemeSample;
-			productReference = AA8D164318A2CE65002E342C /* GlympseSchemeSample.app */;
+			productReference = AA8D164318A2CE65002E342C /* GlyScheme.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -275,7 +275,7 @@
 				);
 				INFOPLIST_FILE = "GlympseSchemeSample/GlympseSchemeSample-Info.plist";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = GlyScheme;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -294,7 +294,7 @@
 				);
 				INFOPLIST_FILE = "GlympseSchemeSample/GlympseSchemeSample-Info.plist";
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = GlyScheme;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

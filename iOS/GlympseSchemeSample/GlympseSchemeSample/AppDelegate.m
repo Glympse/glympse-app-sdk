@@ -7,6 +7,7 @@
 #import "AppDelegate.h"
 #import "MainViewController.h"
 #import "GLYCreateGlympseResult.h"
+#import "GLYRecipient.h"
 
 @implementation AppDelegate
 
@@ -25,9 +26,13 @@
     if ( [[url scheme] isEqualToString:@"glydemoschemeresult"] )
     {
         GLYCreateGlympseResult *reply = [[GLYCreateGlympseResult alloc] initWithUriString:url.absoluteString];
-
-        NSString *replyFormatted = [NSString stringWithFormat:@"Recipients: %@\nDuration: %lld mins",
-                                    [reply.recipients componentsJoinedByString:@", "], (reply.duration / (60 * 1000))];
+        NSMutableString *replyFormatted = [[NSMutableString alloc] init];
+        [replyFormatted appendString:@"Recipients: \n"];
+        for ( GLYRecipient *recipient in reply.recipients )
+        {
+            [replyFormatted appendFormat:@"%@ (%@): %@\n", recipient.name, recipient.address, recipient.message];
+        }
+        [replyFormatted appendFormat:@"Duration: %lld mins", (reply.duration / (60 * 1000))];
         
         [[[UIAlertView alloc] initWithTitle:@"Glympse Created" message:replyFormatted
                                    delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];

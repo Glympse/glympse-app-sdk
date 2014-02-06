@@ -46,8 +46,8 @@
     // Since we are just creating a "link" recipient, we hide the recipient chooser.
     glympseCreateParams.flags = GLYFlagRecipientsHidden;
     
-    glympseCreateParams.returnUrl = @"glydemoschemeresult";
-    glympseCreateParams.returnCancelUrl = @"glydemoschemecancel";
+    glympseCreateParams.returnUrl = @"glydemoschemeresult://";
+    glympseCreateParams.returnCancelUrl = @"glydemoschemecancel://";
     
     // Grab the default subtype from our UI that we would like to use.
     NSString *subtype = [self.subtypeField.text stringByTrimmingCharactersInSet: [NSCharacterSet whitespaceAndNewlineCharacterSet]];
