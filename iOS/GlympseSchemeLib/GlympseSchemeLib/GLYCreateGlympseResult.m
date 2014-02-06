@@ -26,4 +26,13 @@ NSString* GLYReurnUriDuration = @"gly_duration";
     return self;
 }
 
+- (NSURL*)toUrl:(NSString*)returnUrl recipients:(NSArray*)recipients duration:(long long)duration;
+{
+    NSMutableString* urlStr = [[NSMutableString alloc] initWithString:returnUrl];
+    char separator = ( NSNotFound == [returnUrl rangeOfString:@"?"].location ) ? '?' : '&';
+    [urlStr appendFormat:@"%c%@=%@", separator, GLYReurnUriRecipients, [GLYRecipient toString:recipients]];
+    [urlStr appendFormat:@"&%@=%lld", GLYReurnUriDuration, duration];
+    return [NSURL URLWithString:urlStr];
+}
+
 @end

@@ -16,4 +16,6 @@ extern NSString* GLYReurnUriDuration;
 
 - (id)initWithUriString:(NSString*)uriString;
 
+- (NSURL*)toUrl:(NSString*)returnUrl recipients:(NSArray*)recipients duration:(long long)duration;
+
 @end
