@@ -8,15 +8,19 @@
 #import "GLYUriParser.h"
 #import "GLYRecipient.h"
 
-const long long GLYFlagDialog                       = 0x0000000000000001L;
-const long long GLYFlagRecipientsReadOnly           = 0x0000000000010000L;
-const long long GLYFlagRecipientsHidden             = 0x0000000000020000L;
-const long long GLYFlagDurationReadOnly             = 0x0000000000040000L;
-const long long GLYFlagDurationHidden               = 0x0000000000080000L;
-const long long GLYFlagMessageReadOnly              = 0x0000000000100000L;
-const long long GLYFlagMessageHidden                = 0x0000000000200000L;
-const long long GLYFlagDestinationReadOnly          = 0x0000000000400000L;
-const long long GLYFlagDestinationHidden            = 0x0000000000800000L;
+const long long GLYFlagRecipientsEditable           = 0x0000000000000000L;
+const long long GLYFlagRecipientsReadOnly           = 0x0000000000000001L;
+const long long GLYFlagRecipientsDeleteOnly         = 0x0000000000000002L;
+const long long GLYFlagMessageEditable              = 0x0000000000000000L;
+const long long GLYFlagMessageReadOnly              = 0x0000000000000010L;
+const long long GLYFlagMessageDeleteOnly            = 0x0000000000000020L;
+const long long GLYFlagMessageHidden                = 0x0000000000000040L;
+const long long GLYFlagDestinationEditable          = 0x0000000000000000L;
+const long long GLYFlagDestinationReadOnly          = 0x0000000000000100L;
+const long long GLYFlagDestinationDeleteOnly        = 0x0000000000000200L;
+const long long GLYFlagDestinationHidden            = 0x0000000000000400L;
+const long long GLYFlagDurationEditable             = 0x0000000000000000L;
+const long long GLYFlagDurationReadOnly             = 0x0000000000001000L;
 
 const static long long GLYDefaultDuration = 15 * 60 * 1000;
 
