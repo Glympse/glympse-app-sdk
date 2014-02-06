@@ -22,6 +22,8 @@ public class CreateGlympseParams
     private String      _callbackPackage;
     private String      _callbackAction;
     private boolean     _events = false;
+    private String      _initialNickname;
+    private String      _initialAvatar;
     
     /**
      * Sets the flags. See the FLAG_* values.
@@ -79,6 +81,22 @@ public class CreateGlympseParams
     {
         _intentContext = intentContext;
     }    
+    
+    /**
+     * Sets nickname for the user if it isn’t already set.
+     */
+    public void setInitialNickname(String nickname)
+    {
+        _initialNickname = nickname;        
+    }  
+    
+    /**
+     * Sets avatar for the user if it isn’t already set.
+     */
+    public void setInitialAvatar(String avatarUri)
+    {
+        _initialAvatar = avatarUri;        
+    }          
 
     protected void setEvents(boolean events)
     {
@@ -168,6 +186,18 @@ public class CreateGlympseParams
         {
             intent.putExtra(Common.EXTRA_GLYMPSE_CALLBACK_ACTION, _callbackAction);
         }        
+        
+        // Copy over nickname if it is set.
+        if (!Helpers.isEmpty(_initialNickname))
+        {
+            intent.putExtra(Common.EXTRA_GLYMPSE_INITIAL_NICKNAME, _initialNickname);
+        }          
+        
+        // Copy over avatar if it is set.
+        if (!Helpers.isEmpty(_initialAvatar))
+        {
+            intent.putExtra(Common.EXTRA_GLYMPSE_INITIAL_AVATAR, _initialAvatar);
+        }              
         
         // Copy over events flag. 
         intent.putExtra(Common.EXTRA_GLYMPSE_EVENTS, _events);

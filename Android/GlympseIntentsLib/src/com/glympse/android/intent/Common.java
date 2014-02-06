@@ -39,6 +39,8 @@ public class Common
     public static final String EXTRA_GLYMPSE_EVENTS             = "events";
     public static final String EXTRA_GLYMPSE_EVENT              = "event";
     public static final String EXTRA_GLYMPSE_REMAINING          = "remaining";    
+    public static final String EXTRA_GLYMPSE_INITIAL_NICKNAME   = "initial_nickname";
+    public static final String EXTRA_GLYMPSE_INITIAL_AVATAR     = "initial_avatar";
     
     public static final String GLYMPSE_EVENT_CREATING           = "creating";
     public static final String GLYMPSE_EVENT_CREATED            = "created";
