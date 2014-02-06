@@ -6,6 +6,7 @@
 
 #import "AppDelegate.h"
 #import "MainViewController.h"
+#import "GLYCreateGlympseResult.h"
 
 @implementation AppDelegate
 
@@ -17,6 +18,28 @@
     self.window.rootViewController = [[MainViewController alloc] initWithNibName:@"MainViewController" bundle:nil];
     [self.window makeKeyAndVisible];
     return YES;
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    if ( [[url scheme] isEqualToString:@"glydemoschemeresult"] )
+    {
+        GLYCreateGlympseResult *reply = [[GLYCreateGlympseResult alloc] initWithUriString:url.absoluteString];
+
+        NSString *replyFormatted = [NSString stringWithFormat:@"Recipients: %@\nDuration: %lld mins",
+                                    [reply.recipients componentsJoinedByString:@", "], (reply.duration / (60 * 1000))];
+        
+        [[[UIAlertView alloc] initWithTitle:@"Glympse Created" message:replyFormatted
+                                   delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];
+        return YES;
+    }
+    else if ( [[url scheme] isEqualToString:@"glydemoschemecancel"] )
+    {
+        [[[UIAlertView alloc] initWithTitle:@"Glympse Cancelled" message:@"User cancelled."
+                                   delegate:nil cancelButtonTitle:nil otherButtonTitles:@"OK", nil] show];
+        return YES;
+    }
+    return NO;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
