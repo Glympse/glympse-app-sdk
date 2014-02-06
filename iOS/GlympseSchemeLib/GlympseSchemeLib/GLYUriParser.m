@@ -6,8 +6,8 @@
 
 #import "GLYUriParser.h"
 
-NSString* GLYCreateUriScheme = @"glympse:";
-NSString* GLYLaunchUriScheme = @"glympse:";
+NSString* GLYCreateUriScheme = @"glympse3:";
+NSString* GLYLaunchUriScheme = @"glympse3:";
 NSString* GLYWebUri = @"http://glympse.com/";
 NSString* GLYGlympseHostPattern = @"glympse.";
 
