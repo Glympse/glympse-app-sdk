@@ -32,6 +32,7 @@ NSString* GLYCreateUriMessage = @"message";
 NSString* GLYCreateUriDestination = @"destination";
 NSString* GLYCreateUriReturnUrl = @"ret_url";
 NSString* GLYCreateUriReturnCancelUrl = @"ret_cancel_url";
+NSString* GLYCreateUriInitialNickname = @"initial_nickname";
 
 @implementation GLYCreateGlympseParams
 
@@ -78,6 +79,10 @@ NSString* GLYCreateUriReturnCancelUrl = @"ret_cancel_url";
     if ( _returnCancelUrl.length > 0 )
     {
         [uriString appendFormat:@"&%@=%@", GLYCreateUriReturnCancelUrl, [GLYUriParser urlEncode:_returnCancelUrl]];
+    }
+    if ( _initialNickname.length > 0 )
+    {
+        [uriString appendFormat:@"&%@=%@", GLYCreateUriInitialNickname, [GLYUriParser urlEncode:_initialNickname]];
     }
     
     return [NSURL URLWithString:uriString];

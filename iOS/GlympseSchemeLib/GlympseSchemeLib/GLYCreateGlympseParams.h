@@ -32,6 +32,7 @@ extern const long long GLYFlagDurationReadOnly;
 @property GLYPlace* destination;
 @property NSString* returnUrl;
 @property NSString* returnCancelUrl;
+@property NSString* initialNickname;
 
 - (BOOL)isValid;
 
