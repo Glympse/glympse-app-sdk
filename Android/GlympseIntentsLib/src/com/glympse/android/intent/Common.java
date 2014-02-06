@@ -8,15 +8,19 @@ package com.glympse.android.intent;
 
 public class Common 
 {
-    public static final long FLAG_DIALOG                = 0x0000000000000001L;
-    public static final long FLAG_RECIPIENTS_READ_ONLY  = 0x0000000000010000L;
-    public static final long FLAG_RECIPIENTS_HIDDEN     = 0x0000000000020000L;
-    public static final long FLAG_DURATION_READ_ONLY    = 0x0000000000040000L;
-    public static final long FLAG_DURATION_HIDDEN       = 0x0000000000080000L;
-    public static final long FLAG_MESSAGE_READ_ONLY     = 0x0000000000100000L;
-    public static final long FLAG_MESSAGE_HIDDEN        = 0x0000000000200000L;
-    public static final long FLAG_DESTINATION_READ_ONLY = 0x0000000000400000L;
-    public static final long FLAG_DESTINATION_HIDDEN    = 0x0000000000800000L;
+    public static final long FLAG_RECIPIENTS_EDITABLE       = 0x0000000000000000L;
+    public static final long FLAG_RECIPIENTS_READ_ONLY      = 0x0000000000000001L;
+    public static final long FLAG_RECIPIENTS_DELETE_ONLY    = 0x0000000000000002L;    
+    public static final long FLAG_MESSAGE_EDITABLE          = 0x0000000000000000L;
+    public static final long FLAG_MESSAGE_READ_ONLY         = 0x0000000000000010L;
+    public static final long FLAG_MESSAGE_DELETE_ONLY       = 0x0000000000000020L;
+    public static final long FLAG_MESSAGE_HIDDEN            = 0x0000000000000040L;    
+    public static final long FLAG_DESTINATION_EDITABLE      = 0x0000000000000000L;
+    public static final long FLAG_DESTINATION_READ_ONLY     = 0x0000000000000100L;
+    public static final long FLAG_DESTINATION_DELETE_ONLY   = 0x0000000000000200L;
+    public static final long FLAG_DESTINATION_HIDDEN        = 0x0000000000000400L;    
+    public static final long FLAG_DURATION_EDITABLE         = 0x0000000000000000L;
+    public static final long FLAG_DURATION_READ_ONLY        = 0x0000000000001000L;
     
     public static final String ACTION_GLYMPSE_CREATE     = "com.glympse.android.intent.CREATE";
     public static final String ACTION_GLYMPSE_VIEW       = "com.glympse.android.intent.VIEW";
