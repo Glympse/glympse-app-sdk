@@ -6,14 +6,12 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString* GLYReurnUriUrl;
-extern NSString* GLYReurnUriMessage;
+extern NSString* GLYReurnUriRecipients;
 extern NSString* GLYReurnUriDuration;
 
 @interface GLYCreateGlympseResult : NSObject
 
-@property (readonly) NSString* url;
-@property (readonly) NSString* message;
+@property (readonly) NSArray* recipients;
 @property (readonly) long long duration;
 
 - (id)initWithUriString:(NSString*)uriString;

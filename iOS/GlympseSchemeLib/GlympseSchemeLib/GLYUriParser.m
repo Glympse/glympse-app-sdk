@@ -182,8 +182,13 @@ static const int GLYMaximumCodeLength = 128;
 + (NSString*)toJsonString:(id)jsonObject
 {
     NSData* jsonData = [NSJSONSerialization dataWithJSONObject:jsonObject options:0 error:NULL];
-    NSString* jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    return jsonString;
+    return [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
+}
+
++ (id)toJsonObject:(NSString*)jsonString
+{
+    NSData* jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+    return [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:NULL];
 }
 
 #pragma mark - URI helpers

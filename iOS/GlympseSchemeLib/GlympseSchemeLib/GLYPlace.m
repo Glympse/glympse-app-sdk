@@ -5,6 +5,7 @@
 //------------------------------------------------------------------------------
 
 #import "GLYPlace.h"
+#import "GLYUriParser.h"
 
 static NSString* GLYPlaceName = @"name";
 static NSString* GLYPlaceLatitude = @"latitude";
@@ -29,8 +30,7 @@ static NSString* GLYPlaceLongitude = @"longitude";
 {
     if ( self = [super init] )
     {
-        NSData* jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
-        NSDictionary* jsonObject = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:NULL];
+        NSDictionary* jsonObject = [GLYUriParser toJsonObject:jsonString];
         
         _name = [jsonObject objectForKey:GLYPlaceName];
         _latitude = [(NSNumber*)[jsonObject objectForKey:GLYPlaceLatitude] doubleValue];
@@ -50,9 +50,7 @@ static NSString* GLYPlaceLongitude = @"longitude";
     [jsonObject setObject:[NSNumber numberWithDouble:_latitude] forKey:GLYPlaceLatitude];
     [jsonObject setObject:[NSNumber numberWithDouble:_longitude] forKey:GLYPlaceLongitude];
     
-    NSData* jsonData = [NSJSONSerialization dataWithJSONObject:jsonObject options:0 error:NULL];
-    NSString* jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
-    return jsonString;
+    return [GLYUriParser toJsonString:jsonObject];
 }
 
 - (BOOL)isValid

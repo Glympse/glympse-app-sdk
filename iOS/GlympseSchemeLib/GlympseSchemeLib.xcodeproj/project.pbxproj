@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F4ED0D218A344620026422B /* GLYUriParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4ED0D118A344620026422B /* GLYUriParser.m */; };
 		2F9EB30C18A20D780020EAE2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F9EB30B18A20D780020EAE2 /* Foundation.framework */; };
 		2F9EB33318A20E4A0020EAE2 /* GlympseApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9EB33218A20E4A0020EAE2 /* GlympseApp.m */; };
 		2F9EB33918A20EE00020EAE2 /* GLYRecipient.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9EB33818A20EE00020EAE2 /* GLYRecipient.m */; };
 		2F9EB33C18A20EEA0020EAE2 /* GLYPlace.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9EB33B18A20EEA0020EAE2 /* GLYPlace.m */; };
 		2F9EB33F18A20F390020EAE2 /* GLYCreateGlympseParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9EB33E18A20F390020EAE2 /* GLYCreateGlympseParams.m */; };
 		2F9EB34218A20F4B0020EAE2 /* GLYViewGlympseParams.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9EB34118A20F4B0020EAE2 /* GLYViewGlympseParams.m */; };
-		2F9EB34818A2212F0020EAE2 /* GLYUriParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9EB34718A2212F0020EAE2 /* GLYUriParser.m */; };
 		2F9EB35318A2C0970020EAE2 /* GLYCreateGlympseResult.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9EB35218A2C0970020EAE2 /* GLYCreateGlympseResult.m */; };
 /* End PBXBuildFile section */
 
@@ -30,6 +30,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2F4ED0D118A344620026422B /* GLYUriParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLYUriParser.m; sourceTree = "<group>"; };
 		2F9EB30818A20D780020EAE2 /* libGlympseSchemeLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libGlympseSchemeLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F9EB30B18A20D780020EAE2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2F9EB30F18A20D780020EAE2 /* GlympseSchemeLib-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "GlympseSchemeLib-Prefix.pch"; sourceTree = "<group>"; };
@@ -44,7 +45,6 @@
 		2F9EB34018A20F4B0020EAE2 /* GLYViewGlympseParams.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLYViewGlympseParams.h; sourceTree = "<group>"; };
 		2F9EB34118A20F4B0020EAE2 /* GLYViewGlympseParams.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLYViewGlympseParams.m; sourceTree = "<group>"; };
 		2F9EB34618A2212F0020EAE2 /* GLYUriParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLYUriParser.h; sourceTree = "<group>"; };
-		2F9EB34718A2212F0020EAE2 /* GLYUriParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLYUriParser.m; sourceTree = "<group>"; };
 		2F9EB35118A2C0970020EAE2 /* GLYCreateGlympseResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GLYCreateGlympseResult.h; sourceTree = "<group>"; };
 		2F9EB35218A2C0970020EAE2 /* GLYCreateGlympseResult.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLYCreateGlympseResult.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -96,7 +96,7 @@
 				2F9EB33A18A20EEA0020EAE2 /* GLYPlace.h */,
 				2F9EB33B18A20EEA0020EAE2 /* GLYPlace.m */,
 				2F9EB34618A2212F0020EAE2 /* GLYUriParser.h */,
-				2F9EB34718A2212F0020EAE2 /* GLYUriParser.m */,
+				2F4ED0D118A344620026422B /* GLYUriParser.m */,
 				2F9EB33D18A20F390020EAE2 /* GLYCreateGlympseParams.h */,
 				2F9EB33E18A20F390020EAE2 /* GLYCreateGlympseParams.m */,
 				2F9EB35118A2C0970020EAE2 /* GLYCreateGlympseResult.h */,
@@ -160,10 +160,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F9EB33F18A20F390020EAE2 /* GLYCreateGlympseParams.m in Sources */,
+				2F4ED0D218A344620026422B /* GLYUriParser.m in Sources */,
 				2F9EB33918A20EE00020EAE2 /* GLYRecipient.m in Sources */,
 				2F9EB33C18A20EEA0020EAE2 /* GLYPlace.m in Sources */,
 				2F9EB34218A20F4B0020EAE2 /* GLYViewGlympseParams.m in Sources */,
-				2F9EB34818A2212F0020EAE2 /* GLYUriParser.m in Sources */,
 				2F9EB35318A2C0970020EAE2 /* GLYCreateGlympseResult.m in Sources */,
 				2F9EB33318A20E4A0020EAE2 /* GlympseApp.m in Sources */,
 			);

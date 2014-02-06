@@ -6,10 +6,10 @@
 
 #import "GLYCreateGlympseResult.h"
 #import "GLYUriParser.h"
+#import "GLYRecipient.h"
 
-NSString* GLYReurnUriUrl = @"gly_url";
-NSString* GLYReurnUriMessage = @"gly_msg";
-NSString* GLYReurnUriDuration = @"gly_dur";
+NSString* GLYReurnUriRecipients = @"gly_recipients";
+NSString* GLYReurnUriDuration = @"gly_duration";
 
 @implementation GLYCreateGlympseResult
 
@@ -20,8 +20,7 @@ NSString* GLYReurnUriDuration = @"gly_dur";
         NSURL* url = [NSURL URLWithString:uriString];
         NSDictionary* arguments = [GLYUriParser parseQueryString:url.query];
         
-        _url = [GLYUriParser urlDecode:(NSString*)[arguments objectForKey:GLYReurnUriUrl]];
-        _message = [GLYUriParser urlDecode:(NSString*)[arguments objectForKey:GLYReurnUriMessage]];
+        _recipients = [GLYRecipient fromString:[arguments objectForKey:GLYReurnUriRecipients]];
         _duration = [(NSString*)[arguments objectForKey:GLYReurnUriDuration] longLongValue];
     }
     return self;

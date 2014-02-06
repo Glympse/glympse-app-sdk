@@ -20,19 +20,19 @@ extern NSString* GLYRecipientTypeEmail;
            address:(NSString*)address;
 
 - (id)initWithType:(NSString*)type
+           subtype:(NSString*)subtype
               name:(NSString*)name
            address:(NSString*)address
-               url:(NSString*)url;
+               url:(NSString*)url
+           message:(NSString*)message;
 
 - (id)initWithString:(NSString*)jsonString;
-
-- (NSDictionary*)toObject;
-
-- (NSString*)toString;
 
 - (BOOL)isValid;
 
 + (NSString*)toString:(NSArray*)recipients;
+
++ (NSArray*)fromString:(NSString*)recipientsStr;
 
 @property (readonly) NSString* type;
 @property (readonly) NSString* subtype;
@@ -40,5 +40,6 @@ extern NSString* GLYRecipientTypeEmail;
 @property (readonly) NSString* name;
 @property (readonly) NSString* address;
 @property (readonly) NSString* url;
+@property (readonly) NSString* message;
 
 @end

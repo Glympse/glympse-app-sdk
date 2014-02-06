@@ -18,6 +18,7 @@ static NSString* GLYRecipientBrand = @"brand";
 static NSString* GLYRecipientName = @"name";
 static NSString* GLYRecipientAddress = @"address";
 static NSString* GLYRecipientUrl = @"url";
+static NSString* GLYRecipientMessage = @"message";
 
 @implementation GLYRecipient
 
@@ -39,16 +40,20 @@ static NSString* GLYRecipientUrl = @"url";
 }
 
 - (id)initWithType:(NSString*)type
+           subtype:(NSString*)subtype
               name:(NSString*)name
            address:(NSString*)address
                url:(NSString*)url
+           message:(NSString*)message;
 {
     if ( self = [super init] )
     {
         _type = type;
+        _subtype = subtype;
         _name = name;
         _address = address;
         _url = url;
+        _message = message;
     }
     return self;
 }
@@ -57,17 +62,30 @@ static NSString* GLYRecipientUrl = @"url";
 {
     if ( self = [super init] )
     {
-        NSData* jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
-        NSDictionary* jsonObject = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:NULL];
-        
-        _type = [jsonObject objectForKey:GLYRecipientType];
-        _subtype = [jsonObject objectForKey:GLYRecipientSubtype];
-        _brand = [jsonObject objectForKey:GLYRecipientBrand];
-        _name = [jsonObject objectForKey:GLYRecipientName];
-        _address = [jsonObject objectForKey:GLYRecipientAddress];
-        _url = [jsonObject objectForKey:GLYRecipientUrl];
+        NSDictionary* jsonObject = [GLYUriParser toJsonObject:jsonString];
+        [self fromObject:jsonObject];
     }
     return self;
+}
+
+- (id)initWithObject:(NSDictionary*)jsonObject
+{
+    if ( self = [super init] )
+    {
+        [self fromObject:jsonObject];
+    }
+    return self;
+}
+
+- (void)fromObject:(NSDictionary*)jsonObject
+{
+    _type = [jsonObject objectForKey:GLYRecipientType];
+    _subtype = [jsonObject objectForKey:GLYRecipientSubtype];
+    _brand = [jsonObject objectForKey:GLYRecipientBrand];
+    _name = [jsonObject objectForKey:GLYRecipientName];
+    _address = [jsonObject objectForKey:GLYRecipientAddress];
+    _url = [jsonObject objectForKey:GLYRecipientUrl];
+    _message = [jsonObject objectForKey:GLYRecipientMessage];
 }
 
 - (NSDictionary*)toObject
@@ -98,14 +116,12 @@ static NSString* GLYRecipientUrl = @"url";
     {
         [jsonObject setObject:_url forKey:GLYRecipientUrl];
     }
+    if ( _message.length > 0 )
+    {
+        [jsonObject setObject:_message forKey:GLYRecipientMessage];
+    }
 
     return jsonObject;
-}
-
-- (NSString*)toString
-{
-    NSDictionary* jsonObject = [self toObject];
-    return [GLYUriParser toJsonString:jsonObject];
 }
 
 + (NSString*)toString:(NSArray*)recipients
@@ -124,6 +140,18 @@ static NSString* GLYRecipientUrl = @"url";
         return nil;
     }
     return [GLYUriParser toJsonString:recipientObjects];
+}
+
++ (NSArray*)fromString:(NSString*)recipientsStr
+{
+    NSMutableArray* recipients = [[NSMutableArray alloc] init];
+    NSArray* recipientObjects = [GLYUriParser toJsonObject:recipientsStr];
+    for ( NSDictionary* recipientObject in recipientObjects )
+    {
+        GLYRecipient* recipient = [[GLYRecipient alloc] initWithObject:recipientObject];
+        [recipients addObject:recipient];
+    }
+    return recipients;
 }
 
 - (BOOL)isValid

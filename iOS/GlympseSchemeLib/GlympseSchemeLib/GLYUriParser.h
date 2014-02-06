@@ -26,6 +26,8 @@ extern NSString* GLYWebUri;
 
 + (NSString*)toJsonString:(id)jsonObject;
 
++ (id)toJsonObject:(NSString*)jsonString;
+
 + (NSDictionary*)parseQueryString:(NSString*)query;
 
 + (NSString*)urlEncode:(NSString*)str;
