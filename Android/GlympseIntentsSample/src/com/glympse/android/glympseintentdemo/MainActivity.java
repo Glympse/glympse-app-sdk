@@ -48,9 +48,6 @@ public class MainActivity extends Activity
         // Allocate a CreateGlympseParams object. 
         CreateGlympseParams glympseCreateParams = new CreateGlympseParams();
         
-        // Since we are just creating a "link" recipient, we hide the recipient chooser.
-        glympseCreateParams.setFlags(Common.FLAG_RECIPIENTS_HIDDEN);
-
         // Grab the default subtype from our UI that we would like to use.
         String subtype = ((EditText)findViewById(R.id.edit_subtype)).getText().toString().trim();        
         
