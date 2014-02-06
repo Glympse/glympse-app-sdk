@@ -8,25 +8,21 @@ package com.glympse.android.glympseintentdemo;
 
 import com.glympse.android.intent.GlympseApp;
 import com.glympse.android.intent.CreateGlympseParams;
-import com.glympse.android.intent.CreateGlympseResult;
+import com.glympse.android.intent.GlympseCallbackParams;
 import com.glympse.android.intent.ViewGlympseParams;
 import com.glympse.android.intent.Helpers;
 import com.glympse.android.intent.Recipient;
-import com.glympse.android.intent.Common;
 import com.glympse.android.intent.UriParser;
 import com.glympse.android.intent.demo.R;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-public class MainActivity extends Activity
+public class MainActivity extends Activity implements GlympseApp.StatusListener
 {
-    static public int ACTIVITY_CREATE_GLYMPSE = 1;
-    
     @Override protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
@@ -71,11 +67,7 @@ public class MainActivity extends Activity
         }
         
         // Generate a "create a glympse" Intent and start the activity for it. 
-        Intent intent = GlympseApp.createGlympse(this, glympseCreateParams);
-        if (null != intent)
-        {
-            startActivityForResult(intent, ACTIVITY_CREATE_GLYMPSE);
-        }
+        GlympseApp.createGlympse(this, glympseCreateParams, this);
     }    
 
     public void onClickButtonView(View view)
@@ -93,30 +85,18 @@ public class MainActivity extends Activity
             glympseViewParams.addAllGlympsesAndGroups(parseBufferResult);
 
             // Generate a "view a glympse" Intent and start the activity for it. 
-            Intent intent = GlympseApp.viewGlympse(this, true, glympseViewParams);
-            if (null != intent)
-            {
-                startActivity(intent);
-            }
+            GlympseApp.viewGlympse(this, true, glympseViewParams);            
         }
     }
     
-    @Override protected void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
-        // Check to see if a "create a glympse" activity just finished. 
-        if (ACTIVITY_CREATE_GLYMPSE == requestCode)
-        {
-            // Go process the this newly created Glympse.
-            processCreateGlympseResult(GlympseApp.getCreateResult(resultCode, data));
-        }
-        
-        super.onActivityResult(requestCode, resultCode, data);
-    }
-
-    private void processCreateGlympseResult(CreateGlympseResult createResult)
+    /**
+     * GlympseApp.StatusListener
+     */
+    
+    public void glympseDoneSending(GlympseCallbackParams params)
     {
         // Get the list of recipients for the Glympse. There should be just one.
-        Recipient[] recipients = createResult.getRecipients();
+        Recipient[] recipients = params.getRecipients();
         
         // Check to see if we have at least one recipient and it has a URL.
         if ((null != recipients) &&
@@ -135,8 +115,15 @@ public class MainActivity extends Activity
             }
             
             // Append the URL and duration to the text and update our UI with the new text.
-            textView.setText(links + "\n    " + recipients[0].getUrl() + " (" + (createResult.getDuration() / (60 * 1000)) + ")");
+            textView.setText(links + "\n    " + recipients[0].getUrl() + " (" + (params.getDuration() / (60 * 1000)) + ")");
             textView.setVisibility(View.VISIBLE);
         }
+    }
+    
+    public void glympseFailedToCreate(GlympseCallbackParams params)
+    {
+        TextView textView = (TextView)findViewById(R.id.text_links);
+        textView.setText("Failed to send a Glympse");
+        textView.setVisibility(View.VISIBLE);
     }
 }

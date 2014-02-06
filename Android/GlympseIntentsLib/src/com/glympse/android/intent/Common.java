@@ -24,6 +24,7 @@ public class Common
     
     public static final String ACTION_GLYMPSE_CREATE     = "com.glympse.android.intent.CREATE";
     public static final String ACTION_GLYMPSE_VIEW       = "com.glympse.android.intent.VIEW";
+    public static final String ACTION_GLYMPSE_CALLBACK   = "com.glympse.android.intent.CALLBACK";
     
     public static final String EXTRA_GLYMPSE_FLAGS              = "flags";
     public static final String EXTRA_GLYMPSE_BRAND              = "brand";
@@ -34,11 +35,14 @@ public class Common
     public static final String EXTRA_GLYMPSE_CONTEXT            = "context";
     public static final String EXTRA_GLYMPSE_CODES              = "codes";    
     public static final String EXTRA_GLYMPSE_CALLBACK_PACKAGE   = "callback_package";
-    public static final String EXTRA_GLYMPSE_CALLBACK_ACTION    = "callback_action";  
+    public static final String EXTRA_GLYMPSE_CALLBACK_ACTION    = "callback_action";
+    public static final String EXTRA_GLYMPSE_EVENTS             = "events";
     public static final String EXTRA_GLYMPSE_EVENT              = "event";
     public static final String EXTRA_GLYMPSE_REMAINING          = "remaining";    
     
-    public static final String TICKET_EVENT_CREATED             = "created";
-    public static final String TICKET_EVENT_FAILED              = "failed";
-    public static final String TICKET_EVENT_DURATION_CHANGED    = "duration_changed";    
+    public static final String GLYMPSE_EVENT_CREATING           = "creating";
+    public static final String GLYMPSE_EVENT_CREATED            = "created";
+    public static final String GLYMPSE_EVENT_FAILED_TO_CREATE   = "failed_to_create";
+    public static final String GLYMPSE_EVENT_DONE_SENDING       = "sone_sending";
+    public static final String GLYMPSE_EVENT_DURATION_CHANGED   = "duration_changed";    
 }

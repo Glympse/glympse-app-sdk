@@ -8,16 +8,20 @@ package com.glympse.android.intent;
 
 import java.util.LinkedList;
 
+import android.content.Context;
 import android.content.Intent;
 
 public class CreateGlympseParams
 {
-    private long        _flags;
+    private long        _flags = 0;
     private Recipient[] _recipients;
     private int         _duration = -1;
     private String      _message;
     private Place       _destination;
     private String      _intentContext;
+    private String      _callbackPackage;
+    private String      _callbackAction;
+    private boolean     _events = false;
     
     /**
      * Sets the flags. See the FLAG_* values.
@@ -74,7 +78,23 @@ public class CreateGlympseParams
     public void setContext(String intentContext)
     {
         _intentContext = intentContext;
-    }
+    }    
+
+    protected void setEvents(boolean events)
+    {
+        _events = events;
+    }    
+    
+    protected void setCallback(Context context)
+    {
+        _callbackPackage = context.getPackageName();
+        _callbackAction = Common.ACTION_GLYMPSE_CALLBACK + "_" + this.hashCode();
+    }    
+
+    protected String getCallbackAction()
+    {
+        return _callbackAction;
+    }    
     
     /**
      * Helper function to check if this object contains valid data.
@@ -132,9 +152,24 @@ public class CreateGlympseParams
         }
 
         // Copy over the context if it is set.
-        if ((null != _intentContext) && !Helpers.isEmpty(_intentContext))
+        if (!Helpers.isEmpty(_intentContext))
         {
             intent.putExtra(Common.EXTRA_GLYMPSE_CONTEXT, _intentContext);
         }
+        
+        // Copy over callback package if it is set.
+        if (!Helpers.isEmpty(_callbackPackage))
+        {
+            intent.putExtra(Common.EXTRA_GLYMPSE_CALLBACK_PACKAGE, _callbackPackage);
+        }
+        
+        // Copy over callback action if it is set.
+        if (!Helpers.isEmpty(_callbackAction))
+        {
+            intent.putExtra(Common.EXTRA_GLYMPSE_CALLBACK_ACTION, _callbackAction);
+        }        
+        
+        // Copy over events flag. 
+        intent.putExtra(Common.EXTRA_GLYMPSE_EVENTS, _events);
     }
 }

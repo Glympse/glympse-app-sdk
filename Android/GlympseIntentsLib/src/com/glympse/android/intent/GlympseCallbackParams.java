@@ -8,18 +8,24 @@ package com.glympse.android.intent;
 
 import android.content.Intent;
 
-public class CreateGlympseResult
+public class GlympseCallbackParams
 {
-    private int         _duration = -1;
-    private Recipient[] _recipients;
-    private String      _message;
-    private Place       _destination;
-    private String      _intentContext;
+    protected long        _duration = -1;
+    protected long        _remaining = -1;
+    protected Recipient[] _recipients;
+    protected String      _message;
+    protected String      _event;
+    protected Place       _destination;
+    protected String      _intentContext;
+    
+    public GlympseCallbackParams()
+    {
+    }
     
     /**
-     * Parses the "create a glympse" result Intent.
+     * Parses the Glympse callback intent.
      */
-    public CreateGlympseResult(int resultCode, Intent intent)
+    public GlympseCallbackParams(Intent intent)
     {
         if (null != intent)
         {
@@ -35,7 +41,13 @@ public class CreateGlympseResult
             }
             
             // Parse the duration.
-            _duration = (int)intent.getLongExtra(Common.EXTRA_GLYMPSE_DURATION, _duration);
+            _duration = intent.getLongExtra(Common.EXTRA_GLYMPSE_DURATION, _duration);
+            
+            // Parse the remaining time.
+            _remaining = intent.getLongExtra(Common.EXTRA_GLYMPSE_REMAINING, _remaining);
+            
+            // Parse event type.
+            _event = intent.getStringExtra(Common.EXTRA_GLYMPSE_EVENT);
 
             // Attempt to parse the message.
             String message = intent.getStringExtra(Common.EXTRA_GLYMPSE_MESSAGE);
@@ -65,6 +77,14 @@ public class CreateGlympseResult
     }
     
     /**
+     * Returns event that caused this intent.
+     */
+    public String getEvent()
+    {
+        return _event;
+    }     
+    
+    /**
      * Returns the array of recipients of the created glympse, or null if unknown/error.
      */
     public Recipient[] getRecipients()
@@ -75,11 +95,19 @@ public class CreateGlympseResult
     /**
      * Returns the duration of the created glympse, or -1 if unknown/error.
      */
-    public int getDuration()
+    public long getDuration()
     {
         return _duration;
     }
     
+    /**
+     * Returns the remaining time of the created glympse, or -1 if unknown/error.
+     */
+    public long getRemaining()
+    {
+        return _remaining;
+    }    
+
     /**
      * Returns the message of the created glympse, or null if unknown/error.
      */
