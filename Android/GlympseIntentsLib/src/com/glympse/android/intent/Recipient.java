@@ -29,7 +29,7 @@ public class Recipient
     private String _address;
     private String _url;
 
-    public Recipient(String type, String subtype, String brand, String name, String address)
+    protected Recipient(String type, String subtype, String brand, String name, String address, String url)
     {
         _type    = type;
         _subtype = subtype;
@@ -39,14 +39,15 @@ public class Recipient
         _address = address;
     }
     
-    public Recipient(String type, String name, String address, String url)
+    public static Recipient createNew(String type, String subtype, String brand, String name, String address)
     {
-        _type    = type;
-        _type    = type;
-        _name    = name;
-        _address = address;
-        _url = url;        
-    }    
+        return new Recipient(type, subtype, brand, name, address, null);
+    }
+    
+    public static Recipient createFromInvite(String type, String subtype, String name, String address, String url)
+    {
+        return new Recipient(type, subtype, null, name, address, url);
+    }        
 
     protected Recipient(String json)
     {
