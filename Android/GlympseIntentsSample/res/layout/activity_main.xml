@@ -105,6 +105,64 @@
             
         </LinearLayout>
         
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8sp"
+                android:text="@string/nickname_prompt"
+            />
+            
+            <EditText
+                android:id="@+id/edit_nickname"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:text="@string/nickname_default"
+                android:singleLine="true"
+                android:inputType="number"
+            />
+            
+        </LinearLayout>
+        
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8sp"
+                android:text="@string/avatar_uri_prompt"
+            />
+
+            <EditText
+                android:id="@+id/edit_avatar_uri"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:singleLine="true"
+                android:inputType="number"
+            />
+
+	        <Button
+	            android:id="@+id/button_pick_avatar"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_marginTop="8dp"
+	            android:text="@string/pick_avatar_button"
+	            android:onClick="onClickPickAvatar"
+	        />
+
+        </LinearLayout>
+        
         <Button
 	        android:id="@+id/button_create"
             android:layout_width="wrap_content"

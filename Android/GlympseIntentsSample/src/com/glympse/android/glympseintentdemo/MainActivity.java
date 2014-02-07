@@ -6,23 +6,31 @@
 
 package com.glympse.android.glympseintentdemo;
 
-import com.glympse.android.intent.GlympseApp;
-import com.glympse.android.intent.CreateGlympseParams;
-import com.glympse.android.intent.GlympseCallbackParams;
-import com.glympse.android.intent.ViewGlympseParams;
-import com.glympse.android.intent.Helpers;
-import com.glympse.android.intent.Recipient;
-import com.glympse.android.intent.UriParser;
-import com.glympse.android.intent.demo.R;
+import java.io.File;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.glympse.android.intent.CreateGlympseParams;
+import com.glympse.android.intent.GlympseApp;
+import com.glympse.android.intent.GlympseCallbackParams;
+import com.glympse.android.intent.Helpers;
+import com.glympse.android.intent.Recipient;
+import com.glympse.android.intent.UriParser;
+import com.glympse.android.intent.ViewGlympseParams;
+import com.glympse.android.intent.demo.R;
+
 public class MainActivity extends Activity implements GlympseApp.StatusListener
 {
+    protected static final int REQUEST_PICK_PHOTO = 1;
+
     @Override protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
@@ -38,7 +46,51 @@ public class MainActivity extends Activity implements GlympseApp.StatusListener
         findViewById(R.id.button_create).setEnabled(GlympseApp.canCreateGlympse(this));
         findViewById(R.id.button_view).setEnabled(GlympseApp.canViewGlympse(this, true));
     }
-    
+
+    public void onClickPickAvatar(View view)
+    {
+        try
+        {
+            Intent intent = new Intent(Intent.ACTION_PICK);
+            intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, MediaStore.Images.Media.CONTENT_TYPE);
+            startActivityForResult(intent, REQUEST_PICK_PHOTO);
+        }
+        catch (Throwable e)
+        {
+        }
+    }
+
+    @Override protected void onActivityResult(int requestCode, int resultCode, Intent intent)
+    {
+        // Check if we are returning from our OS photo picker.
+        if ((REQUEST_PICK_PHOTO == requestCode) && (RESULT_OK == resultCode) && (null != intent))
+        {
+            // Extract a file URI from the Intent result.
+            Cursor cursor  = null;
+            String fileUri = null;
+            try
+            {
+                cursor = MediaStore.Images.Media.query(getContentResolver(), intent.getData(), null);
+                cursor.moveToFirst();
+                fileUri = Uri.fromFile(new File(cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.DATA)))).toString();
+            }
+            catch (Throwable e)
+            {
+            }
+            finally
+            {
+                if (null != cursor)
+                {
+                    cursor.close();
+                    cursor = null;
+                }
+            }
+
+            ((EditText)findViewById(R.id.edit_avatar_uri)).setText((null != fileUri) ? fileUri : "");
+        }
+        super.onActivityResult(requestCode, resultCode, intent);
+    }
+
     public void onClickButtonCreate(View view)
     {
         // Allocate a CreateGlympseParams object. 
@@ -64,6 +116,20 @@ public class MainActivity extends Activity implements GlympseApp.StatusListener
         }
         catch (Throwable e)
         {
+        }
+
+        // Grab the default nickname from our UI that we would like to use.
+        String nickname = ((EditText)findViewById(R.id.edit_nickname)).getText().toString().trim();
+        if (!nickname.isEmpty())
+        {
+            glympseCreateParams.setInitialNickname(nickname);
+        }
+
+        // Grab the default avatar URI from our UI that we would like to use.
+        String avatarUri = ((EditText)findViewById(R.id.edit_avatar_uri)).getText().toString().trim();
+        if (!avatarUri.isEmpty())
+        {
+            glympseCreateParams.setInitialAvatar(avatarUri);
         }
         
         // Generate a "create a glympse" Intent and start the activity for it. 
