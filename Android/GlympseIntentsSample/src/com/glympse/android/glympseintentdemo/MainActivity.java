@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.glympse.android.intent.Common;
 import com.glympse.android.intent.CreateGlympseParams;
 import com.glympse.android.intent.GlympseApp;
 import com.glympse.android.intent.GlympseCallbackParams;
