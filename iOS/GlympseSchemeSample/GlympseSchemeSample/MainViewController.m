@@ -43,8 +43,8 @@
     // Allocate a CreateGlympseParams object.
     GLYCreateGlympseParams *glympseCreateParams = [[GLYCreateGlympseParams alloc] init];
     
-    // Since we are just creating a "link" recipient, we hide the recipient chooser.
-    glympseCreateParams.flags = GLYFlagRecipientsHidden;
+    // Recipient picker will be presented in read-only mode.
+    glympseCreateParams.flags = GLYFlagRecipientsReadOnly;
     
     glympseCreateParams.returnUrl = @"glydemoschemeresult://";
     glympseCreateParams.returnCancelUrl = @"glydemoschemecancel://";

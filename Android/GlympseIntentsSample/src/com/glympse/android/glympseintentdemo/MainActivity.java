@@ -96,6 +96,9 @@ public class MainActivity extends Activity implements GlympseApp.StatusListener
         // Allocate a CreateGlympseParams object. 
         CreateGlympseParams glympseCreateParams = new CreateGlympseParams();
         
+        // Recipient picker will be presented in read-only mode.
+        glympseCreateParams.setFlags(Common.FLAG_RECIPIENTS_READ_ONLY);
+
         // Grab the default subtype from our UI that we would like to use.
         String subtype = ((EditText)findViewById(R.id.edit_subtype)).getText().toString().trim();        
         
