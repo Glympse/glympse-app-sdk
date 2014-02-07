@@ -34,9 +34,9 @@ public class Recipient
         _type    = type;
         _subtype = subtype;
         _brand   = brand;
-        _type    = type;
         _name    = name;
         _address = address;
+        _url     = url;
     }
     
     public static Recipient createNew(String type, String subtype, String brand, String name, String address)
