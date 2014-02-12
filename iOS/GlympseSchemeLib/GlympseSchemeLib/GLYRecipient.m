@@ -14,6 +14,7 @@ NSString* GLYRecipientTypeEmail = @"email";
 
 static NSString* GLYRecipientType = @"type";
 static NSString* GLYRecipientSubtype = @"subtype";
+static NSString* GLYRecipientCreateOnly = @"create_only";
 static NSString* GLYRecipientBrand = @"brand";
 static NSString* GLYRecipientName = @"name";
 static NSString* GLYRecipientAddress = @"address";
@@ -35,6 +36,26 @@ static NSString* GLYRecipientMessage = @"message";
         _brand = brand;
         _name = name;
         _address = address;
+        _createOnly = NO;
+    }
+    return self;
+}
+
+- (id)initWithType:(NSString*)type
+           subtype:(NSString*)subtype
+             brand:(NSString*)brand
+              name:(NSString*)name
+           address:(NSString*)address
+        createOnly:(BOOL)createOnly
+{
+    if ( self = [super init] )
+    {
+        _type = type;
+        _subtype = subtype;
+        _brand = brand;
+        _name = name;
+        _address = address;
+        _createOnly = createOnly;
     }
     return self;
 }
@@ -52,6 +73,7 @@ static NSString* GLYRecipientMessage = @"message";
         _subtype = subtype;
         _name = name;
         _address = address;
+        _createOnly = NO;
         _url = url;
         _message = message;
     }
@@ -86,6 +108,7 @@ static NSString* GLYRecipientMessage = @"message";
     _address = [jsonObject objectForKey:GLYRecipientAddress];
     _url = [jsonObject objectForKey:GLYRecipientUrl];
     _message = [jsonObject objectForKey:GLYRecipientMessage];
+    _createOnly = [(NSNumber*)[jsonObject objectForKey:GLYRecipientCreateOnly] boolValue];
 }
 
 - (NSDictionary*)toObject
@@ -119,6 +142,10 @@ static NSString* GLYRecipientMessage = @"message";
     if ( _message.length > 0 )
     {
         [jsonObject setObject:_message forKey:GLYRecipientMessage];
+    }
+    if ( _createOnly )
+    {
+        [jsonObject setObject:[NSNumber numberWithBool:_createOnly] forKey:GLYRecipientCreateOnly];
     }
 
     return jsonObject;

@@ -37,7 +37,6 @@
     [super viewDidUnload];
 }
 
-
 - (IBAction)createButton_TouchUpInside:(id)sender
 {
     // Allocate a CreateGlympseParams object.
@@ -57,7 +56,12 @@
     
     // Specify that we want a single "app" recipient.
     [glympseCreateParams.recipients addObject:
-     [[GLYRecipient alloc] initWithType:GLYRecipientTypeApp subtype:subtype brand:brand name:NULL address:NULL]];
+     [[GLYRecipient alloc] initWithType:GLYRecipientTypeApp
+                                subtype:subtype
+                                  brand:brand
+                                   name:NULL
+                                address:NULL
+                             createOnly:YES]];
     
     NSInteger minutes = [self.minutesField.text integerValue];
     glympseCreateParams.duration = (minutes * 60 * 1000);
@@ -82,7 +86,6 @@
         // Allocate a ViewGlympseParams object and tell it what we want to view.
         GLYViewGlympseParams *glympseViewParams = [[GLYViewGlympseParams alloc] init];
         [glympseViewParams addAllGlympsesAndGroups:parseBufferResult];
-
         
         // Generate a "view a glympse" Intent and start the activity for it.
         if ( ![GLYGlympseApp viewGlympse:YES params:glympseViewParams] )

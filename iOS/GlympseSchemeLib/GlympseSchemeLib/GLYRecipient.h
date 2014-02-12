@@ -21,6 +21,13 @@ extern NSString* GLYRecipientTypeEmail;
 
 - (id)initWithType:(NSString*)type
            subtype:(NSString*)subtype
+             brand:(NSString*)brand
+              name:(NSString*)name
+           address:(NSString*)address
+        createOnly:(BOOL)createOnly;
+
+- (id)initWithType:(NSString*)type
+           subtype:(NSString*)subtype
               name:(NSString*)name
            address:(NSString*)address
                url:(NSString*)url
@@ -39,6 +46,7 @@ extern NSString* GLYRecipientTypeEmail;
 @property (readonly) NSString* brand;
 @property (readonly) NSString* name;
 @property (readonly) NSString* address;
+@property (readonly) BOOL createOnly;
 @property (readonly) NSString* url;
 @property (readonly) NSString* message;
 
