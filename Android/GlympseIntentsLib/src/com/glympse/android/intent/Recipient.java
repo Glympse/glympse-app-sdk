@@ -15,38 +15,46 @@ public class Recipient
     public static final String TYPE_SMS   = "sms";
     public static final String TYPE_EMAIL = "email";
     
-    private static final String RECIPIENT_TYPE    = "type";
-    private static final String RECIPIENT_SUBTYPE = "subtype";
-    private static final String RECIPIENT_NAME    = "name";
-    private static final String RECIPIENT_ADDRESS = "address";
-    private static final String RECIPIENT_BRAND   = "brand";
-    private static final String RECIPIENT_URL     = "url";
+    private static final String RECIPIENT_TYPE        = "type";
+    private static final String RECIPIENT_SUBTYPE     = "subtype";
+    private static final String RECIPIENT_NAME        = "name";
+    private static final String RECIPIENT_ADDRESS     = "address";
+    private static final String RECIPIENT_CREATE_ONLY = "create_only";
+    private static final String RECIPIENT_BRAND       = "brand";
+    private static final String RECIPIENT_URL         = "url";
 
     private String _type;
     private String _subtype;
     private String _brand;    
     private String _name;
     private String _address;
+    private boolean _createOnly = false;
     private String _url;
 
-    protected Recipient(String type, String subtype, String brand, String name, String address, String url)
+    protected Recipient(String type, String subtype, String brand, String name, String address, boolean createOnly, String url)
     {
-        _type    = type;
-        _subtype = subtype;
-        _brand   = brand;
-        _name    = name;
-        _address = address;
-        _url     = url;
+        _type       = type;
+        _subtype    = subtype;
+        _brand      = brand;
+        _name       = name;
+        _address    = address;
+        _createOnly = createOnly;
+        _url        = url;
     }
     
     public static Recipient createNew(String type, String subtype, String brand, String name, String address)
     {
-        return new Recipient(type, subtype, brand, name, address, null);
+        return new Recipient(type, subtype, brand, name, address, false, null);
     }
+    
+    public static Recipient createNew(String type, String subtype, String brand, String name, String address, boolean createOnly)
+    {
+        return new Recipient(type, subtype, brand, name, address, createOnly, null);
+    }    
     
     public static Recipient createFromInvite(String type, String subtype, String name, String address, String url)
     {
-        return new Recipient(type, subtype, null, name, address, url);
+        return new Recipient(type, subtype, null, name, address, false, url);
     }        
 
     protected Recipient(String json)
@@ -55,12 +63,13 @@ public class Recipient
         {
             JSONObject jsonObject = new JSONObject(json);
 
-            _type    = jsonObject.optString(RECIPIENT_TYPE,    null);
+            _type = jsonObject.optString(RECIPIENT_TYPE, null);
             _subtype = jsonObject.optString(RECIPIENT_SUBTYPE, null);
-            _brand   = jsonObject.optString(RECIPIENT_BRAND,   null);
-            _name    = jsonObject.optString(RECIPIENT_NAME,    null);
+            _brand = jsonObject.optString(RECIPIENT_BRAND, null);
+            _name = jsonObject.optString(RECIPIENT_NAME, null);
             _address = jsonObject.optString(RECIPIENT_ADDRESS, null);
-            _url     = jsonObject.optString(RECIPIENT_URL,     null);
+            _createOnly = jsonObject.optBoolean(RECIPIENT_CREATE_ONLY, false);
+            _url = jsonObject.optString(RECIPIENT_URL, null);
         }
         catch (Throwable e)
         {
@@ -101,6 +110,11 @@ public class Recipient
             {
                 jsonObject.put(RECIPIENT_URL, _url);
             }                
+            
+            if ( _createOnly )
+            {
+                jsonObject.put(RECIPIENT_CREATE_ONLY, _createOnly);
+            }
         }
         catch (Throwable e)
         {

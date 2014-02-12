@@ -107,7 +107,7 @@ public class MainActivity extends Activity implements GlympseApp.StatusListener
         String brand = ((EditText)findViewById(R.id.edit_brand)).getText().toString().trim();        
 
         // Specify that we want a single "app" recipient.
-        glympseCreateParams.setRecipient(Recipient.createNew(Recipient.TYPE_APP, subtype, brand, null, null));
+        glympseCreateParams.setRecipient(Recipient.createNew(Recipient.TYPE_APP, subtype, brand, null, null, true));
 
         // Grab the default duration from our UI that we would like to use.
         try
