@@ -6,12 +6,8 @@
 
 package com.glympse.android.glympseintentdemo;
 
-import java.io.File;
-
 import android.app.Activity;
 import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
@@ -64,30 +60,9 @@ public class MainActivity extends Activity implements GlympseApp.StatusListener
     @Override protected void onActivityResult(int requestCode, int resultCode, Intent intent)
     {
         // Check if we are returning from our OS photo picker.
-        if ((REQUEST_PICK_PHOTO == requestCode) && (RESULT_OK == resultCode) && (null != intent))
+        if ((REQUEST_PICK_PHOTO == requestCode) && (RESULT_OK == resultCode) && (null != intent) && (null != intent.getData()))
         {
-            // Extract a file URI from the Intent result.
-            Cursor cursor  = null;
-            String fileUri = null;
-            try
-            {
-                cursor = MediaStore.Images.Media.query(getContentResolver(), intent.getData(), null);
-                cursor.moveToFirst();
-                fileUri = Uri.fromFile(new File(cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.DATA)))).toString();
-            }
-            catch (Throwable e)
-            {
-            }
-            finally
-            {
-                if (null != cursor)
-                {
-                    cursor.close();
-                    cursor = null;
-                }
-            }
-
-            ((EditText)findViewById(R.id.edit_avatar_uri)).setText((null != fileUri) ? fileUri : "");
+            ((EditText)findViewById(R.id.edit_avatar_uri)).setText(intent.getData().toString());
         }
         super.onActivityResult(requestCode, resultCode, intent);
     }
@@ -106,7 +81,10 @@ public class MainActivity extends Activity implements GlympseApp.StatusListener
         // Grab the default brand from our UI that we would like to use.
         String brand = ((EditText)findViewById(R.id.edit_brand)).getText().toString().trim();        
 
-        // Specify that we want a single "app" recipient.
+        // Specify that we want a single "app" recipient. The last parameter to createNew()
+        // is a createOnly flag. When set to true, the Glympse app will simply create this
+        // invite URL, but will not attempt to send it. This allows the calling application
+        // to deliver the URL directly, such as pasting it into a messaging conversation.
         glympseCreateParams.setRecipient(Recipient.createNew(Recipient.TYPE_APP, subtype, brand, null, null, true));
 
         // Grab the default duration from our UI that we would like to use.
