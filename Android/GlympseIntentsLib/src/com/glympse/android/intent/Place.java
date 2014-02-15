@@ -13,24 +13,24 @@ public class Place
     private static final String PLACE_NAME      = "name";
     private static final String PLACE_LATITUDE  = "latitude";
     private static final String PLACE_LONGITUDE = "longitude";
-    
+
     private String _name;
     private double _latitude;
     private double _longitude;
-    
+
     public Place(String name, double latitude, double longitude)
     {
         _name      = name;
         _latitude  = latitude;
         _longitude = longitude;
     }
-    
+
     protected Place(String json)
     {
         try
         {
             JSONObject jsonObject = new JSONObject(json);
-            
+
             _name      = jsonObject.optString(PLACE_NAME,      null);
             _latitude  = jsonObject.optDouble(PLACE_LATITUDE,  Double.NaN);
             _longitude = jsonObject.optDouble(PLACE_LONGITUDE, Double.NaN);
@@ -39,7 +39,7 @@ public class Place
         {
         }
     }
-    
+
     @Override public String toString()
     {
         JSONObject jsonObject = new JSONObject();
@@ -60,7 +60,7 @@ public class Place
         }
         return jsonObject.toString();
     }
-    
+
     public boolean isValid()
     {
         return (
@@ -69,12 +69,12 @@ public class Place
             ((_latitude  >=  -90.0)   && (_latitude  <=  90.0))     &&  // Latitude is within range
             ((_longitude >= -180.0)   && (_longitude <= 180.0)));       // Longitude is within range
     }
-    
+
     public String getName()
     {
         return _name;
     }
-    
+
     public double getLatitude()
     {
         return _latitude;

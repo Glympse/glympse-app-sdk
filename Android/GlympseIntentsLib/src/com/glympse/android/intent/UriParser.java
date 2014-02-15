@@ -13,33 +13,33 @@ import java.util.regex.Pattern;
 
 import android.net.Uri;
 
-public class UriParser 
+public class UriParser
 {
     public static final String URL_BASE   = "http://glympse.com/";
-    public static final Uri    URI_SAMPLE = Uri.parse(URL_BASE + "ABCD-1234");        
-    
+    public static final Uri    URI_SAMPLE = Uri.parse(URL_BASE + "ABCD-1234");
+
     private LinkedList<String> _glympses = new LinkedList<String>();
     private LinkedList<String> _requests = new LinkedList<String>();
     private LinkedList<String> _groups   = new LinkedList<String>();
-    
+
     public List<String> getGlympses()
     {
         return _glympses;
     }
-    
+
     public List<String> getRequests()
     {
         return _requests;
     }
-    
+
     public List<String> getGroups()
     {
         return _groups;
     }
-    
+
     public boolean hasGlympseOrGroup()
     {
-        return (((null != _glympses) && (_glympses.size() > 0)) || 
+        return (((null != _glympses) && (_glympses.size() > 0)) ||
                 ((null != _groups)   && (_groups.size()   > 0)));
     }
 
@@ -67,13 +67,13 @@ public class UriParser
         {
             // Convert the glympse code string to a long value.
             long codeValue = base32ToLong(code);
-            
+
             // Check if this is a normal glympse code.
             if (isGlympseCode(codeValue))
             {
                 _glympses.add(code);
             }
-            
+
             // Check if this is a glympse request code.
             else if (isRequestCode(codeValue))
             {
@@ -81,7 +81,7 @@ public class UriParser
             }
         }
     }
-    
+
     private static final int[] BASE32_DECODE =
     {
          0,  1,  2,  3,  4,  5,  6,  7,  8,  9,  // 0 1 2 3 4 5 6 7 8 9
@@ -94,35 +94,35 @@ public class UriParser
         18, 19,  1, 20, 21,  0, 22, 23, 24,      // j k l m n o p q r
         25, 26, 27, 27, 28, 29, 30, 31           // s t u v w x y z
     };
-    
+
     private static long base32ToLong(String text)
-    {   
+    {
         // Convert this base32 encoded string to a long value.
         long result = 0;
         for (int i = 0, length = text.length(); i < length; i++)
         {
             char c = text.charAt(i);
-            
+
             // We skip dashes. They are allowed, but aren't parsed as digits.
             if ('-' != c)
             {
                 // Convert the character into its value.
                 int value = ((c >= 48) && (c <= 122)) ? BASE32_DECODE[(int)c - 48] : -1;
-                
+
                 // If we got back -1, then the character is not valid.
                 if (value < 0)
                 {
                     return 0;
                 }
-                
+
                 // Add this value into our tally.
                 result = (result << 5) + (long)value;
             }
         }
-        
+
         return result;
     }
-    
+
     private static boolean isGlympseCode(long code)
     {
         return ((0 != code) && (0 == ((int)(code >> 35) & 0x3L)));

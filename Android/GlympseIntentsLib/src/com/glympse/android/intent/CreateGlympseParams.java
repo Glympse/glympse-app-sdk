@@ -24,7 +24,7 @@ public class CreateGlympseParams
     private boolean     _events = false;
     private String      _initialNickname;
     private String      _initialAvatar;
-    
+
     /**
      * Sets the flags. See the FLAG_* values.
      */
@@ -32,7 +32,7 @@ public class CreateGlympseParams
     {
         _flags = flags;
     }
-    
+
     /**
      * Sets the initial recipients to send the Glymspe to.
      */
@@ -40,7 +40,7 @@ public class CreateGlympseParams
     {
         _recipients = recipients;
     }
-    
+
     /**
      * Sets an initial recipient to send the Glymspe to.
      */
@@ -80,43 +80,43 @@ public class CreateGlympseParams
     public void setContext(String intentContext)
     {
         _intentContext = intentContext;
-    }    
-    
+    }
+
     /**
      * Sets nickname for the user if it isn’t already set.
      */
     public void setInitialNickname(String nickname)
     {
-        _initialNickname = nickname;        
-    }  
-    
+        _initialNickname = nickname;
+    }
+
     /**
      * Sets avatar for the user if it isn’t already set.
      */
     public void setInitialAvatar(String avatarUri)
     {
-        _initialAvatar = avatarUri;        
-    }          
+        _initialAvatar = avatarUri;
+    }
 
     protected void setEvents(boolean events)
     {
         _events = events;
-    }    
-    
+    }
+
     protected void setCallback(Context context)
     {
         _callbackPackage = context.getPackageName();
         _callbackAction = Common.ACTION_GLYMPSE_CALLBACK + "_" + this.hashCode();
-    }    
+    }
 
     protected String getCallbackAction()
     {
         return _callbackAction;
-    }    
-    
+    }
+
     /**
      * Helper function to check if this object contains valid data.
-     */ 
+     */
     protected boolean isValid()
     {
         return true;
@@ -124,7 +124,7 @@ public class CreateGlympseParams
 
     /**
      * Helper function to transfer the data from this class to an Intent.
-     */ 
+     */
     protected void populateIntent(Intent intent)
     {
         // Copy over the flags if any are set.
@@ -132,7 +132,7 @@ public class CreateGlympseParams
         {
             intent.putExtra(Common.EXTRA_GLYMPSE_FLAGS, _flags);
         }
-        
+
         // Copy over any recipients.
         if (null != _recipients)
         {
@@ -156,7 +156,7 @@ public class CreateGlympseParams
         {
             intent.putExtra(Common.EXTRA_GLYMPSE_DURATION, (long)_duration);
         }
-        
+
         // Copy over the message if it is set.
         if ((null != _message) && !Helpers.isEmpty(_message))
         {
@@ -174,32 +174,32 @@ public class CreateGlympseParams
         {
             intent.putExtra(Common.EXTRA_GLYMPSE_CONTEXT, _intentContext);
         }
-        
+
         // Copy over callback package if it is set.
         if (!Helpers.isEmpty(_callbackPackage))
         {
             intent.putExtra(Common.EXTRA_GLYMPSE_CALLBACK_PACKAGE, _callbackPackage);
         }
-        
+
         // Copy over callback action if it is set.
         if (!Helpers.isEmpty(_callbackAction))
         {
             intent.putExtra(Common.EXTRA_GLYMPSE_CALLBACK_ACTION, _callbackAction);
-        }        
-        
+        }
+
         // Copy over nickname if it is set.
         if (!Helpers.isEmpty(_initialNickname))
         {
             intent.putExtra(Common.EXTRA_GLYMPSE_INITIAL_NICKNAME, _initialNickname);
-        }          
-        
+        }
+
         // Copy over avatar if it is set.
         if (!Helpers.isEmpty(_initialAvatar))
         {
             intent.putExtra(Common.EXTRA_GLYMPSE_INITIAL_AVATAR, _initialAvatar);
-        }              
-        
-        // Copy over events flag. 
+        }
+
+        // Copy over events flag.
         intent.putExtra(Common.EXTRA_GLYMPSE_EVENTS, _events);
     }
 }

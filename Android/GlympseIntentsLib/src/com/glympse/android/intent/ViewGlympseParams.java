@@ -15,7 +15,7 @@ public class ViewGlympseParams
 {
     private long               _flags = 0;
     private LinkedList<String> _codes = new LinkedList<String>();
-    
+
     /**
      * Sets the flags. See the FLAG_* values.
      */
@@ -39,7 +39,7 @@ public class ViewGlympseParams
             }
         }
     }
-    
+
     /**
      * Add all glympse codes ("ABCD-1234") and glympse groups ("!ExampleGroup")
      * that were found in a parsed text buffer.
@@ -67,15 +67,15 @@ public class ViewGlympseParams
 
     /**
      * Helper function to check if this object contains valid data.
-     */ 
+     */
     protected boolean isValid()
     {
         return (_codes.size() > 0);
     }
-    
+
     /**
      * Helper function to transfer the data from this class to an Intent.
-     */ 
+     */
     protected void populateIntentForApp(Intent intent)
     {
         // Copy over the flags if any are set.
@@ -90,7 +90,7 @@ public class ViewGlympseParams
 
     /**
      * Helper function to transfer the data from this class to an Intent.
-     */ 
+     */
     protected void populateIntentForWeb(Intent intent)
     {
         StringBuffer strbuf = new StringBuffer();

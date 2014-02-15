@@ -8,13 +8,13 @@ package com.glympse.android.intent;
 
 import org.json.JSONObject;
 
-public class Recipient 
+public class Recipient
 {
     public static final String TYPE_APP   = "app";
     public static final String TYPE_LINK  = "link";
     public static final String TYPE_SMS   = "sms";
     public static final String TYPE_EMAIL = "email";
-    
+
     private static final String RECIPIENT_TYPE        = "type";
     private static final String RECIPIENT_SUBTYPE     = "subtype";
     private static final String RECIPIENT_NAME        = "name";
@@ -25,7 +25,7 @@ public class Recipient
 
     private String _type;
     private String _subtype;
-    private String _brand;    
+    private String _brand;
     private String _name;
     private String _address;
     private boolean _createOnly = false;
@@ -41,21 +41,21 @@ public class Recipient
         _createOnly = createOnly;
         _url        = url;
     }
-    
+
     public static Recipient createNew(String type, String subtype, String brand, String name, String address)
     {
         return new Recipient(type, subtype, brand, name, address, false, null);
     }
-    
+
     public static Recipient createNew(String type, String subtype, String brand, String name, String address, boolean createOnly)
     {
         return new Recipient(type, subtype, brand, name, address, createOnly, null);
-    }    
-    
+    }
+
     public static Recipient createFromInvite(String type, String subtype, String name, String address, String url)
     {
         return new Recipient(type, subtype, null, name, address, false, url);
-    }        
+    }
 
     protected Recipient(String json)
     {
@@ -85,32 +85,32 @@ public class Recipient
             {
                 jsonObject.put(RECIPIENT_TYPE, _type);
             }
-            
+
             if (!Helpers.isEmpty(_subtype))
             {
                 jsonObject.put(RECIPIENT_SUBTYPE, _subtype);
             }
-            
+
             if (!Helpers.isEmpty(_brand))
             {
                 jsonObject.put(RECIPIENT_BRAND, _brand);
-            }                        
-            
+            }
+
             if (!Helpers.isEmpty(_name))
             {
                 jsonObject.put(RECIPIENT_NAME, _name);
             }
-            
+
             if (!Helpers.isEmpty(_address))
             {
                 jsonObject.put(RECIPIENT_ADDRESS, _address);
-            }                
+            }
 
             if (!Helpers.isEmpty(_url))
             {
                 jsonObject.put(RECIPIENT_URL, _url);
-            }                
-            
+            }
+
             if ( _createOnly )
             {
                 jsonObject.put(RECIPIENT_CREATE_ONLY, _createOnly);
@@ -126,21 +126,21 @@ public class Recipient
     {
         return !Helpers.isEmpty(_type);
     }
-    
+
     public String getType()
     {
         return _type;
-    }    
-    
+    }
+
     public String getSubtype()
     {
         return _subtype;
-    }    
-    
+    }
+
     public String getBrand()
     {
         return _brand;
-    }      
+    }
 
     public String getName()
     {
@@ -150,8 +150,8 @@ public class Recipient
     public String getAddress()
     {
         return _address;
-    }   
-    
+    }
+
     public String getUrl()
     {
         return _url;

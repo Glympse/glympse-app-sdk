@@ -14,14 +14,14 @@
         android:padding="12dp"
         android:orientation="vertical"
         >
-	    
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/create_glympse_title"
             android:textAllCaps="true"
         />
-        
+
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
@@ -29,20 +29,20 @@
             android:layout_marginBottom="16dp"
             android:background="#30FFFFFF"
         />
-        
+
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             >
-            
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="8sp"
                 android:text="@string/subtype_prompt"
             />
-            
+
             <EditText
                 android:id="@+id/edit_subtype"
                 android:layout_width="0px"
@@ -52,22 +52,22 @@
                 android:singleLine="true"
                 android:inputType="text"
             />
-            
-        </LinearLayout>        
-        
+
+        </LinearLayout>
+
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             >
-            
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="8sp"
                 android:text="@string/brand_prompt"
             />
-            
+
             <EditText
                 android:id="@+id/edit_brand"
                 android:layout_width="0px"
@@ -77,22 +77,22 @@
                 android:singleLine="true"
                 android:inputType="text"
             />
-            
+
         </LinearLayout>
-        
+
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             >
-            
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="8sp"
                 android:text="@string/duration_prompt"
             />
-            
+
             <EditText
                 android:id="@+id/edit_duration"
                 android:layout_width="0px"
@@ -102,22 +102,22 @@
                 android:singleLine="true"
                 android:inputType="number"
             />
-            
+
         </LinearLayout>
-        
+
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             >
-            
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="8sp"
                 android:text="@string/nickname_prompt"
             />
-            
+
             <EditText
                 android:id="@+id/edit_nickname"
                 android:layout_width="0px"
@@ -127,9 +127,9 @@
                 android:singleLine="true"
                 android:inputType="number"
             />
-            
+
         </LinearLayout>
-        
+
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -152,26 +152,26 @@
                 android:inputType="number"
             />
 
-	        <Button
-	            android:id="@+id/button_pick_avatar"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_marginTop="8dp"
-	            android:text="@string/pick_avatar_button"
-	            android:onClick="onClickPickAvatar"
-	        />
+            <Button
+                android:id="@+id/button_pick_avatar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/pick_avatar_button"
+                android:onClick="onClickPickAvatar"
+            />
 
         </LinearLayout>
-        
+
         <Button
-	        android:id="@+id/button_create"
+            android:id="@+id/button_create"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/create_glympse_button"
             android:onClick="onClickButtonCreate"
-	    />
-        
+        />
+
         <TextView
             android:id="@+id/text_links"
             android:layout_width="match_parent"
@@ -179,7 +179,7 @@
             android:layout_marginTop="8dp"
             android:visibility="gone"
         />
-        
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -187,7 +187,7 @@
             android:text="@string/view_glympse_title"
             android:textAllCaps="true"
         />
-        
+
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
@@ -195,30 +195,30 @@
             android:layout_marginBottom="16dp"
             android:background="#30FFFFFF"
         />
-        
+
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             >
-            
-		    <TextView
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_marginRight="8sp"
-	            android:text="@string/buffer_prompt"
-	        />
-	        
-		    <EditText
-	            android:id="@+id/edit_buffer"
-	            android:layout_width="0px"
-	            android:layout_height="wrap_content"
-	            android:layout_weight="1.0"
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="8sp"
+                android:text="@string/buffer_prompt"
+            />
+
+            <EditText
+                android:id="@+id/edit_buffer"
+                android:layout_width="0px"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
                 android:text="@string/buffer_default"
                 android:inputType="textMultiLine"
-                android:lines="4"      
-	        />
-		    
+                android:lines="4"
+            />
+
         </LinearLayout>
 
         <CheckBox

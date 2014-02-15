@@ -13,7 +13,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 
-public class Helpers 
+public class Helpers
 {
     /**
      * Helper function to check if an Intent is available on the system.
@@ -29,18 +29,18 @@ public class Helpers
         {
         }
         return false;
-    }    
-    
+    }
+
     /**
-     * Helper function to check if the string is empty.  
+     * Helper function to check if the string is empty.
      */
     public static boolean isEmpty(String str)
     {
         return ((null == str) || (str.length() <= 0));
     }
-    
+
     /**
-     * Helper to extract string array from a bundle by a given key. 
+     * Helper to extract string array from a bundle by a given key.
      */
     public static String[] getStringArray(Bundle bundle, String key)
     {
@@ -68,5 +68,5 @@ public class Helpers
             }
         }
         return null;
-    }    
+    }
 }

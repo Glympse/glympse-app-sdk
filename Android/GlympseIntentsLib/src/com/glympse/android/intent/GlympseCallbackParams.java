@@ -17,11 +17,11 @@ public class GlympseCallbackParams
     protected String      _event;
     protected Place       _destination;
     protected String      _intentContext;
-    
+
     public GlympseCallbackParams()
     {
     }
-    
+
     /**
      * Parses the Glympse callback intent.
      */
@@ -39,13 +39,13 @@ public class GlympseCallbackParams
                     _recipients[i] = new Recipient(recipientJsons[i]);
                 }
             }
-            
+
             // Parse the duration.
             _duration = intent.getLongExtra(Common.EXTRA_GLYMPSE_DURATION, _duration);
-            
+
             // Parse the remaining time.
             _remaining = intent.getLongExtra(Common.EXTRA_GLYMPSE_REMAINING, _remaining);
-            
+
             // Parse event type.
             _event = intent.getStringExtra(Common.EXTRA_GLYMPSE_EVENT);
 
@@ -75,15 +75,15 @@ public class GlympseCallbackParams
             }
         }
     }
-    
+
     /**
      * Returns event that caused this intent.
      */
     public String getEvent()
     {
         return _event;
-    }     
-    
+    }
+
     /**
      * Returns the array of recipients of the created glympse, or null if unknown/error.
      */
@@ -91,7 +91,7 @@ public class GlympseCallbackParams
     {
         return _recipients;
     }
-    
+
     /**
      * Returns the duration of the created glympse, or -1 if unknown/error.
      */
@@ -99,14 +99,14 @@ public class GlympseCallbackParams
     {
         return _duration;
     }
-    
+
     /**
      * Returns the remaining time of the created glympse, or -1 if unknown/error.
      */
     public long getRemaining()
     {
         return _remaining;
-    }    
+    }
 
     /**
      * Returns the message of the created glympse, or null if unknown/error.
@@ -115,7 +115,7 @@ public class GlympseCallbackParams
     {
         return _message;
     }
-    
+
     /**
      * Returns the destination of the created glympse, or null if unknown/error.
      */
@@ -131,4 +131,4 @@ public class GlympseCallbackParams
     {
         return _intentContext;
     }
-}    
+}

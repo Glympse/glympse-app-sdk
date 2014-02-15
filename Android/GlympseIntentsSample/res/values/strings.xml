@@ -18,9 +18,9 @@
     <string name="buffer_prompt">Text:</string>
     <string name="buffer_default">Sample text message that contains one or more Glympse URLs, such as http://glympse.com/BOT-002.</string>
     <string name="show_self">Show self on map</string>
-    
+
     <!-- App-specific values -->
     <string name="brand_default">chaton</string>
     <string name="subtype_default">chaton</string>
-    
+
 </resources>
