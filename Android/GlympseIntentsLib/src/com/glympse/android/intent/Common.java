@@ -8,6 +8,7 @@ package com.glympse.android.intent;
 
 public class Common 
 {
+    // Flags for ACTION_GLYMPSE_CREATE
     public static final long FLAG_RECIPIENTS_EDITABLE       = 0x0000000000000000L;
     public static final long FLAG_RECIPIENTS_READ_ONLY      = 0x0000000000000001L;
     public static final long FLAG_RECIPIENTS_DELETE_ONLY    = 0x0000000000000002L;    
@@ -22,6 +23,9 @@ public class Common
     public static final long FLAG_DURATION_EDITABLE         = 0x0000000000000000L;
     public static final long FLAG_DURATION_READ_ONLY        = 0x0000000000001000L;
     
+    // Flags for ACTION_GLYMPSE_VIEW
+    public static final long FLAG_SHOW_SELF                 = 0x0000000000000001L;
+
     public static final String ACTION_GLYMPSE_CREATE     = "com.glympse.android.intent.CREATE";
     public static final String ACTION_GLYMPSE_VIEW       = "com.glympse.android.intent.VIEW";
     public static final String ACTION_GLYMPSE_CALLBACK   = "com.glympse.android.intent.CALLBACK";

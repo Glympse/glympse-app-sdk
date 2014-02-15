@@ -220,8 +220,16 @@
 	        />
 		    
         </LinearLayout>
-	    
-	    <Button
+
+        <CheckBox
+            android:id="@+id/check_show_self"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:text="@string/show_self"
+        />
+
+        <Button
             android:id="@+id/button_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

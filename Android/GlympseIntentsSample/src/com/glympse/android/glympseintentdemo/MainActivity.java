@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -131,6 +132,12 @@ public class MainActivity extends Activity implements GlympseApp.StatusListener
             // Allocate a ViewGlympseParams object and tell it what we want to view. 
             ViewGlympseParams glympseViewParams = new ViewGlympseParams();
             glympseViewParams.addAllGlympsesAndGroups(parseBufferResult);
+
+            // Check if we want to show ourself on the map as well.
+            if (((CheckBox)findViewById(R.id.check_show_self)).isChecked())
+            {
+                glympseViewParams.setFlags(Common.FLAG_SHOW_SELF);
+            }
 
             // Generate a "view a glympse" Intent and start the activity for it. 
             GlympseApp.viewGlympse(this, true, glympseViewParams);            

@@ -13,8 +13,17 @@ import android.net.Uri;
 
 public class ViewGlympseParams
 {
+    private long               _flags = 0;
     private LinkedList<String> _codes = new LinkedList<String>();
     
+    /**
+     * Sets the flags. See the FLAG_* values.
+     */
+    public void setFlags(long flags)
+    {
+        _flags = flags;
+    }
+
     /**
      * Add a glympse code ("ABCD-1234") or glympse group ("!ExampleGroup") to
      * watch in the "view a glympse" activity.
@@ -69,6 +78,12 @@ public class ViewGlympseParams
      */ 
     protected void populateIntentForApp(Intent intent)
     {
+        // Copy over the flags if any are set.
+        if (0 != _flags)
+        {
+            intent.putExtra(Common.EXTRA_GLYMPSE_FLAGS, _flags);
+        }
+
         String[] codesArray = new String[_codes.size()];
         intent.putExtra(Common.EXTRA_GLYMPSE_CODES, _codes.toArray(codesArray));
     }

@@ -127,7 +127,7 @@ public class CreateGlympseParams
      */ 
     protected void populateIntent(Intent intent)
     {
-        // Copy over the brand ID if it is set.
+        // Copy over the flags if any are set.
         if (0 != _flags)
         {
             intent.putExtra(Common.EXTRA_GLYMPSE_FLAGS, _flags);
