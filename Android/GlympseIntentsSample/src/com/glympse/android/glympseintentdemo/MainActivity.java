@@ -69,7 +69,7 @@ public class MainActivity extends Activity implements GlympseApp.StatusListener
 
         // Check if we are returning from creating a Glympse. This is only
         // needed when not using a StatusListener to obtain the result.
-        else if ((REQUEST_CREATE_GLYMPSE == requestCode) && (RESULT_OK == resultCode) && (null != intent) && (null != intent.getData()))
+        else if ((REQUEST_CREATE_GLYMPSE == requestCode) && (RESULT_OK == resultCode) && (null != intent))
         {
             glympseDoneSending(GlympseApp.getCreateResult(intent));
         }
