@@ -22,6 +22,8 @@ public class Common
     public static final long FLAG_DESTINATION_HIDDEN        = 0x0000000000000400L;
     public static final long FLAG_DURATION_EDITABLE         = 0x0000000000000000L;
     public static final long FLAG_DURATION_READ_ONLY        = 0x0000000000001000L;
+    public static final long FLAG_USE_RETURN_INTENT         = 0x0000000010000000L;
+    public static final long FLAG_ENABLE_EVENTS             = 0x0000000020000000L;
 
     // Flags for ACTION_GLYMPSE_VIEW
     public static final long FLAG_SHOW_SELF                 = 0x0000000000000001L;
@@ -40,7 +42,6 @@ public class Common
     public static final String EXTRA_GLYMPSE_CODES              = "codes";
     public static final String EXTRA_GLYMPSE_CALLBACK_PACKAGE   = "callback_package";
     public static final String EXTRA_GLYMPSE_CALLBACK_ACTION    = "callback_action";
-    public static final String EXTRA_GLYMPSE_EVENTS             = "events";
     public static final String EXTRA_GLYMPSE_EVENT              = "event";
     public static final String EXTRA_GLYMPSE_REMAINING          = "remaining";
     public static final String EXTRA_GLYMPSE_INITIAL_NICKNAME   = "initial_nickname";

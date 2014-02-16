@@ -6,10 +6,8 @@
 
 package com.glympse.android.intent;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.net.Uri;
 
 public class GlympseApp
@@ -38,8 +36,8 @@ public class GlympseApp
      */
     public static boolean canCreateGlympse(Context context)
     {
-        return Helpers.isIntentAvailable(context, getCreateGlympseIntent()) ||
-               Helpers.isIntentAvailable(context, getInstallGlympseIntent());
+        return Helpers.isIntentAvailable(context, getRawCreateGlympseIntent()) ||
+               Helpers.isIntentAvailable(context, getRawInstallGlympseIntent());
     }
 
     /**
@@ -49,68 +47,53 @@ public class GlympseApp
      */
     public static boolean canViewGlympse(Context context, boolean includeWeb)
     {
-        return Helpers.isIntentAvailable(context, getViewGlympseInAppIntent()) ||
-               (includeWeb && Helpers.isIntentAvailable(context, getViewGlympseInWebIntent())) ||
-               Helpers.isIntentAvailable(context, getInstallGlympseIntent());
+        return Helpers.isIntentAvailable(context, getRawViewGlympseInAppIntent()) ||
+               (includeWeb && Helpers.isIntentAvailable(context, getRawViewGlympseInWebIntent())) ||
+               Helpers.isIntentAvailable(context, getRawInstallGlympseIntent());
     }
 
     /**
      * Launches the "create a glympse" activity.
      */
-    public static void createGlympse(Context context, CreateGlympseParams params, StatusListener status)
-    {
-        createGlympse(context, params, status, null);
-    }
-
-    /**
-     * Launches the "create a glympse" activity.
-     */
-    public static void createGlympse(Context context, CreateGlympseParams params, StatusListener status, EventsListener events)
+    public static boolean createGlympse(Context context, CreateGlympseParams params)
     {
         // Prepare intent.
-        Intent intent = getCreateGlympseIntent(context, params, status, events);
+        Intent intent = getCreateGlympseIntent(context, params);
         if (null != intent)
         {
-            // Start listening to callback intents.
-            String callbackAction = params.getCallbackAction();
-            if ( !Helpers.isEmpty(callbackAction) )
+            // Launch the activity.
+            try
             {
-                BroadcastReceiver receiver = new GlympseIntentsReceiver(status, events);
-                IntentFilter filter = new IntentFilter(callbackAction);
-                context.getApplicationContext().registerReceiver(receiver, filter);
+                context.startActivity(intent);
+                return true;
             }
-
-            // Launch the  activity.
-            context.startActivity(intent);
+            catch (Throwable e)
+            {
+            }
         }
+        return false;
     }
 
     /**
      * Returns an Intent that can launch the "create a glympse" activity.
      */
-    public static Intent getCreateGlympseIntent(Context context, CreateGlympseParams params, StatusListener statusListener, EventsListener events)
+    public static Intent getCreateGlympseIntent(Context context, CreateGlympseParams params)
     {
-        // Enable GLympse events if corresponding listener is specified.
-        params.setEvents(events != null);
-
         // Make sure we were passed a create glympse params and that it looks valid.
         if ((null != params) && params.isValid())
         {
             // Build the create glympse Intent and make sure it is available.
-            Intent intent = getCreateGlympseIntent();
+            Intent intent = getRawCreateGlympseIntent();
             if (Helpers.isIntentAvailable(context, intent))
             {
-                // Configure callback mechanism.
-                params.setCallback(context);
-
                 // Transfer the information from the params to the Intent.
-                params.populateIntent(intent);
+                params.populateIntent(context, intent);
                 return intent;
             }
 
             // If we failed to find the view glympse Intent on this system,
             // then use the install Glympse Intent instead.
-            intent = getInstallGlympseIntent();
+            intent = getRawInstallGlympseIntent();
             return Helpers.isIntentAvailable(context, intent) ? intent : null;
         }
 
@@ -120,13 +103,22 @@ public class GlympseApp
     /**
      * Launches the "view a glympse" activity.
      */
-    public static void viewGlympse(Context context, boolean includeWeb, ViewGlympseParams params)
+    public static boolean viewGlympse(Context context, boolean includeWeb, ViewGlympseParams params)
     {
         Intent intent = getViewGlympseIntent(context, includeWeb, params);
         if (null != intent)
         {
-            context.startActivity(intent);
+            // Launch the activity.
+            try
+            {
+                context.startActivity(intent);
+                return true;
+            }
+            catch (Throwable e)
+            {
+            }
         }
+        return false;
     }
 
     /**
@@ -138,7 +130,7 @@ public class GlympseApp
         if ((null != params) && params.isValid())
         {
             // Build the view glympse in app Intent and make sure it is available.
-            Intent intent = getViewGlympseInAppIntent();
+            Intent intent = getRawViewGlympseInAppIntent();
             if (Helpers.isIntentAvailable(context, intent))
             {
                 // Transfer the information from the params to the Intent.
@@ -149,7 +141,7 @@ public class GlympseApp
             if (includeWeb)
             {
                 // Build the view glympse in web Intent and make sure it is available.
-                intent = getViewGlympseInWebIntent();
+                intent = getRawViewGlympseInWebIntent();
                 if (Helpers.isIntentAvailable(context, intent))
                 {
                     // Transfer the information from the params to the Intent.
@@ -160,7 +152,7 @@ public class GlympseApp
 
             // If we failed to find the create glympse Intent on this system,
             // then use the install Glympse Intent instead.
-            intent = getInstallGlympseIntent();
+            intent = getRawInstallGlympseIntent();
             return Helpers.isIntentAvailable(context, intent) ? intent : null;
         }
 
@@ -186,7 +178,7 @@ public class GlympseApp
     /**
      * Helper function to get the raw "Glympse install" Intent.
      */
-    public static Intent getInstallGlympseIntent()
+    private static Intent getRawInstallGlympseIntent()
     {
         //return new Intent(Intent.ACTION_VIEW, Uri.parse("samsungapps://ProductDetail/com.glympse.android.glympse")).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_INCLUDE_STOPPED_PACKAGES);
         return new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=com.glympse.android.glympse"));
@@ -195,7 +187,7 @@ public class GlympseApp
     /**
      * Helper function to get the raw "create a glympse" Intent.
      */
-    public static Intent getCreateGlympseIntent()
+    private static Intent getRawCreateGlympseIntent()
     {
         return new Intent(Common.ACTION_GLYMPSE_CREATE);
     }
@@ -203,7 +195,7 @@ public class GlympseApp
     /**
      * Helper function to get the raw "view a glympse in app" Intent.
      */
-    public static Intent getViewGlympseInAppIntent()
+    private static Intent getRawViewGlympseInAppIntent()
     {
         return new Intent(Common.ACTION_GLYMPSE_VIEW);
     }
@@ -211,78 +203,8 @@ public class GlympseApp
     /**
      * Helper function to get the raw "view a glympse in app" Intent.
      */
-    public static Intent getViewGlympseInWebIntent()
+    private static Intent getRawViewGlympseInWebIntent()
     {
         return new Intent(Intent.ACTION_VIEW, UriParser.URI_SAMPLE);
-    }
-
-    /**
-     * Class to listen to Glympse application callback intents.
-     */
-    private static class GlympseIntentsReceiver extends BroadcastReceiver
-    {
-        private StatusListener _status;
-        private EventsListener _events;
-
-        public GlympseIntentsReceiver(StatusListener status, EventsListener events)
-        {
-            _status = status;
-            _events = events;
-        }
-
-        @Override public void onReceive(Context context, Intent intent)
-        {
-            GlympseCallbackParams params = new GlympseCallbackParams(intent);
-            String event = params.getEvent();
-            if ( Helpers.isEmpty(event) )
-            {
-                return;
-            }
-
-            if ( Common.GLYMPSE_EVENT_CREATING.equals(event) )
-            {
-                if ( null != _events )
-                {
-                    _events.glympseCreating(params);
-                }
-            }
-            else if ( Common.GLYMPSE_EVENT_CREATED.equals(event) )
-            {
-                if ( null != _events )
-                {
-                    _events.glympseCreated(params);
-                }
-            }
-            else if ( Common.GLYMPSE_EVENT_FAILED_TO_CREATE.equals(event) )
-            {
-                if ( null != _status )
-                {
-                    _status.glympseFailedToCreate(params);
-                }
-                context.unregisterReceiver(this);
-            }
-            else if ( Common.GLYMPSE_EVENT_DONE_SENDING.equals(event) )
-            {
-                if ( null != _status )
-                {
-                    _status.glympseDoneSending(params);
-                }
-                if ( null == _events )
-                {
-                    context.unregisterReceiver(this);
-                }
-            }
-            else if ( Common.GLYMPSE_EVENT_DURATION_CHANGED.equals(event) )
-            {
-                if ( null != _events )
-                {
-                    _events.glympseDurationChanged(params);
-                }
-                if ( params.getRemaining() <= 0 )
-                {
-                    context.unregisterReceiver(this);
-                }
-            }
-        }
     }
 }

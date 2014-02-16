@@ -13,7 +13,7 @@ import android.net.Uri;
 
 public class ViewGlympseParams
 {
-    private long               _flags = 0;
+    private long               _flags;
     private LinkedList<String> _codes = new LinkedList<String>();
 
     /**

@@ -27,7 +27,8 @@ import com.glympse.android.intent.demo.R;
 
 public class MainActivity extends Activity implements GlympseApp.StatusListener
 {
-    protected static final int REQUEST_PICK_PHOTO = 1;
+    protected static final int REQUEST_PICK_PHOTO     = 1;
+    protected static final int REQUEST_CREATE_GLYMPSE = 2;
 
     @Override protected void onCreate(Bundle savedInstanceState)
     {
@@ -65,16 +66,24 @@ public class MainActivity extends Activity implements GlympseApp.StatusListener
         {
             ((EditText)findViewById(R.id.edit_avatar_uri)).setText(intent.getData().toString());
         }
+
+        // Check if we are returning from creating a Glympse. This is only
+        // needed when not using a StatusListener to obtain the result.
+        else if ((REQUEST_CREATE_GLYMPSE == requestCode) && (RESULT_OK == resultCode) && (null != intent) && (null != intent.getData()))
+        {
+            glympseDoneSending(GlympseApp.getCreateResult(intent));
+        }
+
         super.onActivityResult(requestCode, resultCode, intent);
     }
 
     public void onClickButtonCreate(View view)
     {
         // Allocate a CreateGlympseParams object.
-        CreateGlympseParams glympseCreateParams = new CreateGlympseParams();
+        CreateGlympseParams createGlympseParams = new CreateGlympseParams();
 
         // Recipient picker will be presented in read-only mode.
-        glympseCreateParams.setFlags(Common.FLAG_RECIPIENTS_READ_ONLY);
+        createGlympseParams.setFlags(Common.FLAG_RECIPIENTS_READ_ONLY);
 
         // Grab the default subtype from our UI that we would like to use.
         String subtype = ((EditText)findViewById(R.id.edit_subtype)).getText().toString().trim();
@@ -86,7 +95,7 @@ public class MainActivity extends Activity implements GlympseApp.StatusListener
         // is a createOnly flag. When set to true, the Glympse app will simply create this
         // invite URL, but will not attempt to send it. This allows the calling application
         // to deliver the URL directly, such as pasting it into a messaging conversation.
-        glympseCreateParams.setRecipient(Recipient.createNew(Recipient.TYPE_APP, subtype, brand, null, null, true));
+        createGlympseParams.setRecipient(Recipient.createNew(Recipient.TYPE_APP, subtype, brand, null, null, true));
 
         // Grab the default duration from our UI that we would like to use.
         try
@@ -94,7 +103,7 @@ public class MainActivity extends Activity implements GlympseApp.StatusListener
             int minutes = Integer.parseInt(((EditText)findViewById(R.id.edit_duration)).getText().toString().trim());
             if (minutes >= 0)
             {
-                glympseCreateParams.setDuration(minutes * 60 * 1000);
+                createGlympseParams.setDuration(minutes * 60 * 1000);
             }
         }
         catch (Throwable e)
@@ -105,18 +114,34 @@ public class MainActivity extends Activity implements GlympseApp.StatusListener
         String nickname = ((EditText)findViewById(R.id.edit_nickname)).getText().toString().trim();
         if (!nickname.isEmpty())
         {
-            glympseCreateParams.setInitialNickname(nickname);
+            createGlympseParams.setInitialNickname(nickname);
         }
 
         // Grab the default avatar URI from our UI that we would like to use.
         String avatarUri = ((EditText)findViewById(R.id.edit_avatar_uri)).getText().toString().trim();
         if (!avatarUri.isEmpty())
         {
-            glympseCreateParams.setInitialAvatar(avatarUri);
+            createGlympseParams.setInitialAvatar(avatarUri);
         }
 
-        // Generate a "create a glympse" Intent and start the activity for it.
-        GlympseApp.createGlympse(this, glympseCreateParams, this);
+        // Check to see if we should be using the return intent. This will force
+        // the Glympse application to return the result to our onActivityResult()
+        // method instead on using the StatusListener.
+        if (((CheckBox)findViewById(R.id.check_use_return_intent)).isChecked())
+        {
+            Intent intent = GlympseApp.getCreateGlympseIntent(this, createGlympseParams);
+            startActivityForResult(intent, REQUEST_CREATE_GLYMPSE);
+        }
+
+        // Otherwise, we are using the StatusListener to get the Glympse result.
+        // This is the recommended way to create a Glympse since it ensures the
+        // calling application gets the result of the Glympse creation, even if
+        // it happens after the Glympse activity is dismissed.
+        else
+        {
+            createGlympseParams.setStatusListener(this);
+            GlympseApp.createGlympse(this, createGlympseParams);
+        }
     }
 
     public void onClickButtonView(View view)
@@ -130,17 +155,17 @@ public class MainActivity extends Activity implements GlympseApp.StatusListener
         if (parseBufferResult.hasGlympseOrGroup())
         {
             // Allocate a ViewGlympseParams object and tell it what we want to view.
-            ViewGlympseParams glympseViewParams = new ViewGlympseParams();
-            glympseViewParams.addAllGlympsesAndGroups(parseBufferResult);
+            ViewGlympseParams viewGlympseParams = new ViewGlympseParams();
+            viewGlympseParams.addAllGlympsesAndGroups(parseBufferResult);
 
             // Check if we want to show ourself on the map as well.
             if (((CheckBox)findViewById(R.id.check_show_self)).isChecked())
             {
-                glympseViewParams.setFlags(Common.FLAG_SHOW_SELF);
+                viewGlympseParams.setFlags(Common.FLAG_SHOW_SELF);
             }
 
             // Generate a "view a glympse" Intent and start the activity for it.
-            GlympseApp.viewGlympse(this, true, glympseViewParams);
+            GlympseApp.viewGlympse(this, true, viewGlympseParams);
         }
     }
 

@@ -8,22 +8,26 @@ package com.glympse.android.intent;
 
 import java.util.LinkedList;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+
+import com.glympse.android.intent.GlympseApp.EventsListener;
+import com.glympse.android.intent.GlympseApp.StatusListener;
 
 public class CreateGlympseParams
 {
-    private long        _flags = 0;
-    private Recipient[] _recipients;
-    private int         _duration = -1;
-    private String      _message;
-    private Place       _destination;
-    private String      _intentContext;
-    private String      _callbackPackage;
-    private String      _callbackAction;
-    private boolean     _events = false;
-    private String      _initialNickname;
-    private String      _initialAvatar;
+    private long           _flags;
+    private Recipient[]    _recipients;
+    private int            _duration = -1;
+    private String         _message;
+    private Place          _destination;
+    private String         _intentContext;
+    private String         _initialNickname;
+    private String         _initialAvatar;
+    private StatusListener _statusListener;
+    private EventsListener _eventsListener;
 
     /**
      * Sets the flags. See the FLAG_* values.
@@ -31,6 +35,48 @@ public class CreateGlympseParams
     public void setFlags(long flags)
     {
         _flags = flags;
+    }
+
+    /**
+     * Sets the status listener that is used to return the resulting Glympse
+     * information once the Glympse is created and sent. If no StatusListener
+     * is passed in, then Glympse will return the Glympse creation information
+     * in the return Intent from the Glympse activity. It is highly recommended
+     * to pass in a StatusListener since creating and sending a Glympse is an
+     * asynchronous operation and might not complete by the time the activity
+     * returns to your process. If no StatusListener is used and the user backs
+     * out of the Glympse UI before the Glympse can be fully created sent, then
+     * there is no way for your application to access the created Glympse.
+     */
+    public void setStatusListener(StatusListener statusListener)
+    {
+        _statusListener = statusListener;
+    }
+
+    /**
+     * Sets the listener for extended events. This is only needed if
+     * you are interested in receiving ongoing events about the state
+     * of the Glympse.
+     */
+    public void setEventsListener(EventsListener eventsListener)
+    {
+        _eventsListener = eventsListener;
+    }
+
+    /**
+     * Returns the currently set StatusListener.
+     */
+    public StatusListener getStatusListener()
+    {
+        return _statusListener;
+    }
+
+    /**
+     * Returns the currently set EventsListener.
+     */
+    public EventsListener getEventsListener()
+    {
+        return _eventsListener;
     }
 
     /**
@@ -98,22 +144,6 @@ public class CreateGlympseParams
         _initialAvatar = avatarUri;
     }
 
-    protected void setEvents(boolean events)
-    {
-        _events = events;
-    }
-
-    protected void setCallback(Context context)
-    {
-        _callbackPackage = context.getPackageName();
-        _callbackAction = Common.ACTION_GLYMPSE_CALLBACK + "_" + this.hashCode();
-    }
-
-    protected String getCallbackAction()
-    {
-        return _callbackAction;
-    }
-
     /**
      * Helper function to check if this object contains valid data.
      */
@@ -125,12 +155,16 @@ public class CreateGlympseParams
     /**
      * Helper function to transfer the data from this class to an Intent.
      */
-    protected void populateIntent(Intent intent)
+    protected void populateIntent(Context context, Intent intent)
     {
+        long flags = _flags |
+            ((null == _statusListener) ? Common.FLAG_USE_RETURN_INTENT : 0) |
+            ((null != _eventsListener) ? Common.FLAG_ENABLE_EVENTS     : 0);
+
         // Copy over the flags if any are set.
-        if (0 != _flags)
+        if (0 != flags)
         {
-            intent.putExtra(Common.EXTRA_GLYMPSE_FLAGS, _flags);
+            intent.putExtra(Common.EXTRA_GLYMPSE_FLAGS, flags);
         }
 
         // Copy over any recipients.
@@ -175,18 +209,6 @@ public class CreateGlympseParams
             intent.putExtra(Common.EXTRA_GLYMPSE_CONTEXT, _intentContext);
         }
 
-        // Copy over callback package if it is set.
-        if (!Helpers.isEmpty(_callbackPackage))
-        {
-            intent.putExtra(Common.EXTRA_GLYMPSE_CALLBACK_PACKAGE, _callbackPackage);
-        }
-
-        // Copy over callback action if it is set.
-        if (!Helpers.isEmpty(_callbackAction))
-        {
-            intent.putExtra(Common.EXTRA_GLYMPSE_CALLBACK_ACTION, _callbackAction);
-        }
-
         // Copy over nickname if it is set.
         if (!Helpers.isEmpty(_initialNickname))
         {
@@ -199,7 +221,95 @@ public class CreateGlympseParams
             intent.putExtra(Common.EXTRA_GLYMPSE_INITIAL_AVATAR, _initialAvatar);
         }
 
-        // Copy over events flag.
-        intent.putExtra(Common.EXTRA_GLYMPSE_EVENTS, _events);
+        // Copy over callback package.
+        if (null != context)
+        {
+            intent.putExtra(Common.EXTRA_GLYMPSE_CALLBACK_PACKAGE, context.getPackageName());
+        }
+
+        // Copy over callback action if needed.
+        if ((null != _statusListener) || (null != _eventsListener))
+        {
+            // Build the action string to use for our callback.
+            String callbackAction = Common.ACTION_GLYMPSE_CALLBACK + "_" + this.hashCode();
+
+            // Set this in the intent so Glympse knows how to call us back.
+            intent.putExtra(Common.EXTRA_GLYMPSE_CALLBACK_ACTION, callbackAction);
+
+            // Register a broadcast listener to capture the return intents.
+            BroadcastReceiver receiver = new GlympseIntentsReceiver(_statusListener, _eventsListener);
+            IntentFilter filter = new IntentFilter(callbackAction);
+            context.getApplicationContext().registerReceiver(receiver, filter);
+        }
+    }
+
+    /**
+     * Class to listen to Glympse application callback intents.
+     */
+    private static class GlympseIntentsReceiver extends BroadcastReceiver
+    {
+        private StatusListener _status;
+        private EventsListener _events;
+
+        public GlympseIntentsReceiver(StatusListener status, EventsListener events)
+        {
+            _status = status;
+            _events = events;
+        }
+
+        @Override public void onReceive(Context context, Intent intent)
+        {
+            GlympseCallbackParams params = new GlympseCallbackParams(intent);
+            String event = params.getEvent();
+            if ( Helpers.isEmpty(event) )
+            {
+                return;
+            }
+
+            if ( Common.GLYMPSE_EVENT_CREATING.equals(event) )
+            {
+                if ( null != _events )
+                {
+                    _events.glympseCreating(params);
+                }
+            }
+            else if ( Common.GLYMPSE_EVENT_CREATED.equals(event) )
+            {
+                if ( null != _events )
+                {
+                    _events.glympseCreated(params);
+                }
+            }
+            else if ( Common.GLYMPSE_EVENT_FAILED_TO_CREATE.equals(event) )
+            {
+                if ( null != _status )
+                {
+                    _status.glympseFailedToCreate(params);
+                }
+                context.unregisterReceiver(this);
+            }
+            else if ( Common.GLYMPSE_EVENT_DONE_SENDING.equals(event) )
+            {
+                if ( null != _status )
+                {
+                    _status.glympseDoneSending(params);
+                }
+                if ( null == _events )
+                {
+                    context.unregisterReceiver(this);
+                }
+            }
+            else if ( Common.GLYMPSE_EVENT_DURATION_CHANGED.equals(event) )
+            {
+                if ( null != _events )
+                {
+                    _events.glympseDurationChanged(params);
+                }
+                if ( params.getRemaining() <= 0 )
+                {
+                    context.unregisterReceiver(this);
+                }
+            }
+        }
     }
 }
