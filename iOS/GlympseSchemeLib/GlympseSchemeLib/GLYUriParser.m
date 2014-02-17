@@ -250,8 +250,9 @@ static const char URLSAFE[256] =
 {
     //NSString and CFString % encoding helpers do not handle & or / correctly, so we do it ourselves:
     const char DEC2HEX[16 + 1] = "0123456789ABCDEF";
-    const unsigned char * pSrc = (const unsigned char *)[str UTF8String];
-    const size_t SRC_LEN = strlen([str UTF8String]);
+    const char * cstr = [str UTF8String];
+    const unsigned char * pSrc = (const unsigned char *)cstr;
+    const size_t SRC_LEN = strlen(cstr);
     unsigned char * const pStart = malloc((SRC_LEN * 3 + 1) * sizeof(unsigned char));
     unsigned char * pEnd = pStart;
     const unsigned char * const SRC_END = pSrc + SRC_LEN;
