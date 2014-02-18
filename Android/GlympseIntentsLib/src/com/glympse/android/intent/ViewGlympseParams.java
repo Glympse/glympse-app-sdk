@@ -8,6 +8,7 @@ package com.glympse.android.intent;
 
 import java.util.LinkedList;
 
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
@@ -76,8 +77,14 @@ public class ViewGlympseParams
     /**
      * Helper function to transfer the data from this class to an Intent.
      */
-    protected void populateIntentForApp(Intent intent)
+    protected void populateIntentForApp(Context context, Intent intent)
     {
+        // Specify library version that was used to populate this intent.
+        intent.putExtra(Common.EXTRA_GLYMPSE_APP_SDK_REV, Common.APP_SDK_REV);
+
+        // Pass package name in "source" argument.
+        intent.putExtra(Common.EXTRA_GLYMPSE_SOURCE, context.getPackageName());
+
         // Copy over the flags if any are set.
         if (0 != _flags)
         {

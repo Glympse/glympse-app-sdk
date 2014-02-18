@@ -134,7 +134,7 @@ public class GlympseApp
             if (Helpers.isIntentAvailable(context, intent))
             {
                 // Transfer the information from the params to the Intent.
-                params.populateIntentForApp(intent);
+                params.populateIntentForApp(context, intent);
                 return intent;
             }
 
