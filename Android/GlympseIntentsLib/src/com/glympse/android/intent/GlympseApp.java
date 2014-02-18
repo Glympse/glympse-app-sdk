@@ -17,8 +17,8 @@ public class GlympseApp
      */
     public interface StatusListener
     {
-        public void glympseDoneSending(GlympseCallbackParams params);
-        public void glympseFailedToCreate(GlympseCallbackParams params);
+        void glympseDoneSending(GlympseCallbackParams params);
+        void glympseFailedToCreate(GlympseCallbackParams params);
     }
 
     /**
@@ -26,9 +26,9 @@ public class GlympseApp
      */
     public interface EventsListener
     {
-        public void glympseCreating(GlympseCallbackParams params);
-        public void glympseCreated(GlympseCallbackParams params);
-        public void glympseDurationChanged(GlympseCallbackParams params);
+        void glympseCreating(GlympseCallbackParams params);
+        void glympseCreated(GlympseCallbackParams params);
+        void glympseDurationChanged(GlympseCallbackParams params);
     }
 
     /**

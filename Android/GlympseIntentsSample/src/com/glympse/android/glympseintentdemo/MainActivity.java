@@ -126,12 +126,12 @@ public class MainActivity extends Activity implements GlympseApp.StatusListener
 
         // Check to see if we should be using the return intent. This will force
         // the Glympse application to return the result to our onActivityResult()
-        // method instead on using the StatusListener.
+        // method instead of using the StatusListener.
         if (((CheckBox)findViewById(R.id.check_use_activity_result)).isChecked())
-        {            
+        {
             // Tell Glympse application that caller is waiting for the result in onActivityResult().
             createGlympseParams.setFlags(createGlympseParams.getFlags() | Common.FLAG_USE_ACTIVITY_RESULT);
-            
+
             // Invoke "Send a Glympse" wizard.
             Intent intent = GlympseApp.getCreateGlympseIntent(this, createGlympseParams);
             startActivityForResult(intent, REQUEST_CREATE_GLYMPSE);

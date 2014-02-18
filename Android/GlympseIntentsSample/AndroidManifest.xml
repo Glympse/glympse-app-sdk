@@ -2,8 +2,8 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.glympse.android.intent.demo"
-    android:versionCode="4"
-    android:versionName="1.03"
+    android:versionCode="5"
+    android:versionName="1.04"
     android:installLocation="auto"
     >
 

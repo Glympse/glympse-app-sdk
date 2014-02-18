@@ -36,14 +36,14 @@ public class CreateGlympseParams
     {
         _flags = flags;
     }
-    
+
     /**
      * Gets the flags. See the FLAG_* values.
      */
     public long getFlags()
     {
         return _flags;
-    }    
+    }
 
     /**
      * Sets the status listener that is used to return the resulting Glympse
@@ -165,9 +165,9 @@ public class CreateGlympseParams
      */
     protected void populateIntent(Context context, Intent intent)
     {
-        // Pass package name in "source" argument. 
+        // Pass package name in "source" argument.
         intent.putExtra(Common.EXTRA_GLYMPSE_SOURCE, context.getPackageName());
-        
+
         long flags = _flags |
             ((null != _eventsListener) ? Common.FLAG_ENABLE_EVENTS : 0);
 
@@ -251,8 +251,8 @@ public class CreateGlympseParams
             IntentFilter filter = new IntentFilter(callbackAction);
             context.getApplicationContext().registerReceiver(receiver, filter);
         }
-        
-        // Specify library version that was used to populate this intent. 
+
+        // Specify library version that was used to populate this intent.
         intent.putExtra(Common.EXTRA_GLYMPSE_APP_SDK_REV, Common.APP_SDK_REV);
     }
 
