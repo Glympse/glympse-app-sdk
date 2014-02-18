@@ -8,6 +8,8 @@
 #import "GLYUriParser.h"
 #import "GLYRecipient.h"
 
+extern int GLYAppSdkRev;
+
 const long long GLYFlagRecipientsEditable           = 0x0000000000000000L;
 const long long GLYFlagRecipientsReadOnly           = 0x0000000000000001L;
 const long long GLYFlagRecipientsDeleteOnly         = 0x0000000000000002L;
@@ -34,6 +36,7 @@ NSString* GLYCreateUriReturnUrl = @"ret_url";
 NSString* GLYCreateUriReturnCancelUrl = @"ret_cancel_url";
 NSString* GLYCreateUriInitialNickname = @"initial_nickname";
 NSString* GLYCreateUriSource = @"source";
+NSString* GLYCreateUriAppSdkRev = @"app_sdk_rev";
 
 @implementation GLYCreateGlympseParams
 
@@ -88,6 +91,9 @@ NSString* GLYCreateUriSource = @"source";
     
     // Specify 'source' argument. It should alwys contain package name.
     [uriString appendFormat:@"&%@=%@", GLYCreateUriSource, [GLYUriParser urlEncode:[NSBundle mainBundle].bundleIdentifier]];
+    
+    // Also append SDK revision that generated this URI.
+    [uriString appendFormat:@"&%@=%d", GLYCreateUriAppSdkRev, GLYAppSdkRev];
     
     return [NSURL URLWithString:uriString];
 }

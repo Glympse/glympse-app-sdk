@@ -47,10 +47,13 @@ public class Common
     public static final String EXTRA_GLYMPSE_REMAINING          = "remaining";
     public static final String EXTRA_GLYMPSE_INITIAL_NICKNAME   = "initial_nickname";
     public static final String EXTRA_GLYMPSE_INITIAL_AVATAR     = "initial_avatar";
+    public static final String EXTRA_GLYMPSE_APP_SDK_REV        = "app_sdk_rev";
 
     public static final String GLYMPSE_EVENT_CREATING           = "creating";
     public static final String GLYMPSE_EVENT_CREATED            = "created";
     public static final String GLYMPSE_EVENT_FAILED_TO_CREATE   = "failed_to_create";
     public static final String GLYMPSE_EVENT_DONE_SENDING       = "done_sending";
     public static final String GLYMPSE_EVENT_DURATION_CHANGED   = "duration_changed";
+    
+    public static final int APP_SDK_REV = 10;
 }

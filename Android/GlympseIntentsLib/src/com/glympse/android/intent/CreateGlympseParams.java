@@ -251,6 +251,9 @@ public class CreateGlympseParams
             IntentFilter filter = new IntentFilter(callbackAction);
             context.getApplicationContext().registerReceiver(receiver, filter);
         }
+        
+        // Specify library version that was used to populate this intent. 
+        intent.putExtra(Common.EXTRA_GLYMPSE_APP_SDK_REV, Common.APP_SDK_REV);
     }
 
     /**

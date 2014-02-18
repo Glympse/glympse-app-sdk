@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2F0084FD18B2FC1B00EB9F95 /* GLYCommon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2F0084FB18B2FC1B00EB9F95 /* GLYCommon.cpp */; };
 		2F4ED0D218A344620026422B /* GLYUriParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F4ED0D118A344620026422B /* GLYUriParser.m */; };
 		2F9EB30C18A20D780020EAE2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2F9EB30B18A20D780020EAE2 /* Foundation.framework */; };
 		2F9EB33318A20E4A0020EAE2 /* GLYGlympseApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 2F9EB33218A20E4A0020EAE2 /* GLYGlympseApp.m */; };
@@ -30,6 +31,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2F0084FB18B2FC1B00EB9F95 /* GLYCommon.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = GLYCommon.cpp; sourceTree = "<group>"; };
 		2F4ED0D118A344620026422B /* GLYUriParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GLYUriParser.m; sourceTree = "<group>"; };
 		2F9EB30818A20D780020EAE2 /* libGlympseSchemeLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libGlympseSchemeLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F9EB30B18A20D780020EAE2 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -91,6 +93,7 @@
 			children = (
 				2F9EB33118A20E4A0020EAE2 /* GLYGlympseApp.h */,
 				2F9EB33218A20E4A0020EAE2 /* GLYGlympseApp.m */,
+				2F0084FB18B2FC1B00EB9F95 /* GLYCommon.cpp */,
 				2F9EB33718A20EE00020EAE2 /* GLYRecipient.h */,
 				2F9EB33818A20EE00020EAE2 /* GLYRecipient.m */,
 				2F9EB33A18A20EEA0020EAE2 /* GLYPlace.h */,
@@ -162,6 +165,7 @@
 				2F9EB33F18A20F390020EAE2 /* GLYCreateGlympseParams.m in Sources */,
 				2F4ED0D218A344620026422B /* GLYUriParser.m in Sources */,
 				2F9EB33918A20EE00020EAE2 /* GLYRecipient.m in Sources */,
+				2F0084FD18B2FC1B00EB9F95 /* GLYCommon.cpp in Sources */,
 				2F9EB33C18A20EEA0020EAE2 /* GLYPlace.m in Sources */,
 				2F9EB34218A20F4B0020EAE2 /* GLYViewGlympseParams.m in Sources */,
 				2F9EB35318A2C0970020EAE2 /* GLYCreateGlympseResult.m in Sources */,
