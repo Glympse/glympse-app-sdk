@@ -36,6 +36,14 @@ public class CreateGlympseParams
     {
         _flags = flags;
     }
+    
+    /**
+     * Gets the flags. See the FLAG_* values.
+     */
+    public long getFlags()
+    {
+        return _flags;
+    }    
 
     /**
      * Sets the status listener that is used to return the resulting Glympse
@@ -129,7 +137,7 @@ public class CreateGlympseParams
     }
 
     /**
-     * Sets nickname for the user if it isn’t already set.
+     * Sets nickname for the user if it isn't already set.
      */
     public void setInitialNickname(String nickname)
     {
@@ -137,7 +145,7 @@ public class CreateGlympseParams
     }
 
     /**
-     * Sets avatar for the user if it isn’t already set.
+     * Sets avatar for the user if it isn't already set.
      */
     public void setInitialAvatar(String avatarUri)
     {
@@ -158,8 +166,7 @@ public class CreateGlympseParams
     protected void populateIntent(Context context, Intent intent)
     {
         long flags = _flags |
-            ((null == _statusListener) ? Common.FLAG_USE_RETURN_INTENT : 0) |
-            ((null != _eventsListener) ? Common.FLAG_ENABLE_EVENTS     : 0);
+            ((null != _eventsListener) ? Common.FLAG_ENABLE_EVENTS : 0);
 
         // Copy over the flags if any are set.
         if (0 != flags)

@@ -164,11 +164,11 @@
         </LinearLayout>
 
         <CheckBox
-            android:id="@+id/check_use_return_intent"
+            android:id="@+id/check_use_activity_result"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="false"
-            android:text="@string/use_return_intent"
+            android:text="@string/use_activity_result"
         />
 
         <Button

@@ -22,7 +22,7 @@ public class Common
     public static final long FLAG_DESTINATION_HIDDEN        = 0x0000000000000400L;
     public static final long FLAG_DURATION_EDITABLE         = 0x0000000000000000L;
     public static final long FLAG_DURATION_READ_ONLY        = 0x0000000000001000L;
-    public static final long FLAG_USE_RETURN_INTENT         = 0x0000000010000000L;
+    public static final long FLAG_USE_ACTIVITY_RESULT       = 0x0000000010000000L;
     public static final long FLAG_ENABLE_EVENTS             = 0x0000000020000000L;
 
     // Flags for ACTION_GLYMPSE_VIEW
