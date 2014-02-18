@@ -165,6 +165,9 @@ public class CreateGlympseParams
      */
     protected void populateIntent(Context context, Intent intent)
     {
+        // Pass package name in "source" argument. 
+        intent.putExtra(Common.EXTRA_GLYMPSE_SOURCE, context.getPackageName());
+        
         long flags = _flags |
             ((null != _eventsListener) ? Common.FLAG_ENABLE_EVENTS : 0);
 
