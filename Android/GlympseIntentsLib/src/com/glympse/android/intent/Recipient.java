@@ -152,6 +152,11 @@ public class Recipient
         return _address;
     }
 
+    public boolean isCreateOnly()
+    {
+        return _createOnly;
+    }
+
     public String getUrl()
     {
         return _url;
