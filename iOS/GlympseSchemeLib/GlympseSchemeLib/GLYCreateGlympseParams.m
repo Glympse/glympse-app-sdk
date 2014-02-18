@@ -33,6 +33,7 @@ NSString* GLYCreateUriDestination = @"destination";
 NSString* GLYCreateUriReturnUrl = @"ret_url";
 NSString* GLYCreateUriReturnCancelUrl = @"ret_cancel_url";
 NSString* GLYCreateUriInitialNickname = @"initial_nickname";
+NSString* GLYCreateUriSource = @"source";
 
 @implementation GLYCreateGlympseParams
 
@@ -84,6 +85,9 @@ NSString* GLYCreateUriInitialNickname = @"initial_nickname";
     {
         [uriString appendFormat:@"&%@=%@", GLYCreateUriInitialNickname, [GLYUriParser urlEncode:_initialNickname]];
     }
+    
+    // Specify 'source' argument. It should alwys contain package name.
+    [uriString appendFormat:@"&%@=%@", GLYCreateUriSource, [GLYUriParser urlEncode:[NSBundle mainBundle].bundleIdentifier]];
     
     return [NSURL URLWithString:uriString];
 }
