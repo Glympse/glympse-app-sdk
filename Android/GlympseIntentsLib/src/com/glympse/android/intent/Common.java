@@ -34,7 +34,6 @@ public class Common
 
     public static final String EXTRA_GLYMPSE_SOURCE             = "source";
     public static final String EXTRA_GLYMPSE_FLAGS              = "flags";
-    public static final String EXTRA_GLYMPSE_BRAND              = "brand";
     public static final String EXTRA_GLYMPSE_RECIPIENTS         = "recipients";
     public static final String EXTRA_GLYMPSE_DURATION           = "duration";
     public static final String EXTRA_GLYMPSE_MESSAGE            = "message";
