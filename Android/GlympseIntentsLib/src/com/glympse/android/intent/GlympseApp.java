@@ -189,7 +189,7 @@ public class GlympseApp
      */
     private static Intent getRawCreateGlympseIntent()
     {
-        return new Intent(Common.ACTION_GLYMPSE_CREATE);
+        return new Intent(Common.ACTION_GLYMPSE_CREATE).setPackage(Common.GLYMPSE_PACKAGE_NAME);
     }
 
     /**
@@ -197,7 +197,7 @@ public class GlympseApp
      */
     private static Intent getRawViewGlympseInAppIntent()
     {
-        return new Intent(Common.ACTION_GLYMPSE_VIEW);
+        return new Intent(Common.ACTION_GLYMPSE_VIEW).setPackage(Common.GLYMPSE_PACKAGE_NAME);
     }
 
     /**

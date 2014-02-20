@@ -125,7 +125,7 @@
                 android:layout_weight="1.0"
                 android:text="@string/nickname_default"
                 android:singleLine="true"
-                android:inputType="number"
+                android:inputType="textCapWords"
             />
 
         </LinearLayout>
@@ -149,7 +149,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1.0"
                 android:singleLine="true"
-                android:inputType="number"
+                android:inputType="textUri"
             />
 
             <Button

@@ -34,6 +34,15 @@ public class MainActivity extends Activity implements GlympseApp.StatusListener
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Add our build number to our title.
+        try
+        {
+            setTitle(getString(R.string.app_name) + " (" + getPackageManager().getPackageInfo(getPackageName(), 0).versionCode + ")");
+        }
+        catch (Throwable e)
+        {
+        }
     }
 
     @Override protected void onStart()
@@ -112,14 +121,14 @@ public class MainActivity extends Activity implements GlympseApp.StatusListener
 
         // Grab the default nickname from our UI that we would like to use.
         String nickname = ((EditText)findViewById(R.id.edit_nickname)).getText().toString().trim();
-        if (!nickname.isEmpty())
+        if (!Helpers.isEmpty(nickname))
         {
             createGlympseParams.setInitialNickname(nickname);
         }
 
         // Grab the default avatar URI from our UI that we would like to use.
         String avatarUri = ((EditText)findViewById(R.id.edit_avatar_uri)).getText().toString().trim();
-        if (!avatarUri.isEmpty())
+        if (!Helpers.isEmpty(avatarUri))
         {
             createGlympseParams.setInitialAvatar(avatarUri);
         }
