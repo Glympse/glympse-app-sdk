@@ -70,7 +70,7 @@ public class Common
     public static final String GLYMPSE_EVENT_CREATED          = "created";
     public static final String GLYMPSE_EVENT_DURATION_CHANGED = "duration_changed";
 
-    public static final int APP_SDK_REV                       = 11;
+    public static final int APP_SDK_REV                       = 12;
 
     public static final String GLYMPSE_PACKAGE_NAME           = "com.glympse.android.glympse";
 }

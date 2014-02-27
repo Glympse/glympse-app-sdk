@@ -28,6 +28,7 @@ public class CreateGlympseParams
     private String         _initialAvatar;
     private StatusListener _statusListener;
     private EventsListener _eventsListener;
+    private String         _callbackAction;
 
     /**
      * Sets the flags. See the FLAG_* values.
@@ -69,6 +70,15 @@ public class CreateGlympseParams
     public void setEventsListener(EventsListener eventsListener)
     {
         _eventsListener = eventsListener;
+    }
+    
+    /**
+     * Sets the intent action to use when the caller
+     * wishes to specify their own receiver for callbacks.
+     */
+    public void setCallbackAction(String callbackAction)
+    {
+        _callbackAction = callbackAction;
     }
 
     /**
@@ -172,7 +182,7 @@ public class CreateGlympseParams
         intent.putExtra(Common.EXTRA_GLYMPSE_SOURCE, context.getPackageName());
 
         long flags = _flags |
-            ((null != _eventsListener) ? Common.FLAG_ENABLE_EVENTS : 0);
+            ((null != _eventsListener) || (null != _callbackAction) ? Common.FLAG_ENABLE_EVENTS : 0);
 
         // Copy over the flags if any are set.
         if (0 != flags)
@@ -253,6 +263,11 @@ public class CreateGlympseParams
             BroadcastReceiver receiver = new GlympseIntentsReceiver(_statusListener, _eventsListener);
             IntentFilter filter = new IntentFilter(callbackAction);
             context.getApplicationContext().registerReceiver(receiver, filter);
+        }
+        else if ( null != _callbackAction )
+        {
+            intent.putExtra(Common.EXTRA_GLYMPSE_CALLBACK_ACTION, _callbackAction);
+            
         }
     }
 
