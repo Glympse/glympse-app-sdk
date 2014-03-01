@@ -56,7 +56,7 @@ public class CreateGlympseParams
      * returns to your process. If no StatusListener is used and the user backs
      * out of the Glympse UI before the Glympse can be fully created sent, then
      * there is no way for your application to access the created Glympse.
-     * 
+     *
      * Setting a status listener will clear the value of callbackAction since
      * it is not possible to use a custom broadcast receiver in addition to
      * the receiver provided by this library for the same intents.
@@ -64,7 +64,7 @@ public class CreateGlympseParams
     public void setStatusListener(StatusListener statusListener)
     {
         _statusListener = statusListener;
-        
+
          // Clear action
         _callbackAction = null;
     }
@@ -73,7 +73,7 @@ public class CreateGlympseParams
      * Sets the listener for extended events. This is only needed if
      * you are interested in receiving ongoing events about the state
      * of the Glympse.
-     * 
+     *
      * Setting an event listener will clear the value of callbackAction since
      * it is not possible to use a custom broadcast receiver in addition to
      * the receiver provided by this library for the same intents.
@@ -81,23 +81,23 @@ public class CreateGlympseParams
     public void setEventsListener(EventsListener eventsListener)
     {
         _eventsListener = eventsListener;
-        
+
         // Clear action
         _callbackAction = null;
     }
-    
+
     /**
      * Sets the intent action to use when the caller
      * wishes to specify their own receiver for callbacks.
-     * 
-     * Setting a callback action will clear the value of statusListener and 
-     * eventListener since it is not possible to use a custom broadcast receiver 
+     *
+     * Setting a callback action will clear the value of statusListener and
+     * eventListener since it is not possible to use a custom broadcast receiver
      * in addition to the receiver provided by this library for the same intents.
      */
     public void setCallbackAction(String callbackAction)
     {
         _callbackAction = callbackAction;
-        
+
         // Clear event & status listener
         _eventsListener = null;
         _statusListener = null;
@@ -289,7 +289,7 @@ public class CreateGlympseParams
         else if ( null != _callbackAction )
         {
             intent.putExtra(Common.EXTRA_GLYMPSE_CALLBACK_ACTION, _callbackAction);
-            
+
         }
     }
 
