@@ -19,7 +19,7 @@
         >
 
         <activity
-            android:name="com.glympse.android.glympseintentdemo.MainActivity"
+            android:name="com.glympse.android.intent.demo.MainActivity"
             android:label="@string/app_name"
             android:configChanges="mcc|mnc|locale|touchscreen|keyboard|keyboardHidden|navigation|screenLayout|fontScale|uiMode|orientation|screenSize|smallestScreenSize|layoutDirection"
             android:windowSoftInputMode="stateHidden|adjustResize"

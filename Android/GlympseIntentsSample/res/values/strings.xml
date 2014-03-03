@@ -21,7 +21,7 @@
     <string name="show_self">Show self on map</string>
 
     <!-- App-specific values -->
-    <string name="brand_default">chaton</string>
-    <string name="subtype_default">chaton</string>
+    <string name="brand_default">hangouts</string>
+    <string name="subtype_default">hangouts</string>
 
 </resources>

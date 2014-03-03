@@ -4,7 +4,7 @@
 //
 //------------------------------------------------------------------------------
 
-package com.glympse.android.glympseintentdemo;
+package com.glympse.android.intent.demo;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -23,7 +23,6 @@ import com.glympse.android.intent.Helpers;
 import com.glympse.android.intent.Recipient;
 import com.glympse.android.intent.UriParser;
 import com.glympse.android.intent.ViewGlympseParams;
-import com.glympse.android.intent.demo.R;
 
 public class MainActivity extends Activity implements GlympseApp.StatusListener
 {
