@@ -24,6 +24,8 @@ public class Common
     public static final long FLAG_DURATION_READ_ONLY          = 0x0000000000001000L;
     public static final long FLAG_USE_ACTIVITY_RESULT         = 0x0000000010000000L;
     public static final long FLAG_ENABLE_EVENTS               = 0x0000000020000000L;
+    public static final long FLAG_APPEND_URI_QUERY            = 0x0000000040000000L;
+    public static final long FLAG_APPEND_URI_FRAGMENT         = 0x0000000080000000L;
 
     // Flags for ACTION_GLYMPSE_VIEW
     public static final long FLAG_SHOW_SELF                   = 0x0000000000000001L;
@@ -38,28 +40,29 @@ public class Common
     public static final String ACTION_GLYMPSE_CALLBACK        = "com.glympse.android.intent.CALLBACK";
 
     // Extras used with both ACTION_GLYMPSE_CREATE and ACTION_GLYMPSE_VIEW actions.
-    public static final String EXTRA_GLYMPSE_FLAGS            = "flags";
-    public static final String EXTRA_GLYMPSE_SOURCE           = "source";
-    public static final String EXTRA_GLYMPSE_APP_SDK_REV      = "app_sdk_rev";
+    public static final String EXTRA_GLYMPSE_FLAGS            = "flags";             // long (bit flags)
+    public static final String EXTRA_GLYMPSE_SOURCE           = "source";            // string
+    public static final String EXTRA_GLYMPSE_APP_SDK_REV      = "app_sdk_rev";       // int
 
     // Extras used with ACTION_GLYMPSE_CREATE action.
-    public static final String EXTRA_GLYMPSE_RECIPIENTS       = "recipients";
-    public static final String EXTRA_GLYMPSE_DURATION         = "duration";
-    public static final String EXTRA_GLYMPSE_MESSAGE          = "message";
-    public static final String EXTRA_GLYMPSE_DESTINATION      = "destination";
-    public static final String EXTRA_GLYMPSE_INITIAL_NICKNAME = "initial_nickname";
-    public static final String EXTRA_GLYMPSE_INITIAL_AVATAR   = "initial_avatar";
-    public static final String EXTRA_GLYMPSE_CONTEXT          = "context";
-    public static final String EXTRA_GLYMPSE_CALLBACK_PACKAGE = "callback_package";
-    public static final String EXTRA_GLYMPSE_CALLBACK_ACTION  = "callback_action";
+    public static final String EXTRA_GLYMPSE_RECIPIENTS       = "recipients";        // array of (json) strings
+    public static final String EXTRA_GLYMPSE_DURATION         = "duration";          // long (milliseconds)
+    public static final String EXTRA_GLYMPSE_MESSAGE          = "message";           // string
+    public static final String EXTRA_GLYMPSE_DESTINATION      = "destination";       // string (json)
+    public static final String EXTRA_GLYMPSE_INITIAL_NICKNAME = "initial_nickname";  // string
+    public static final String EXTRA_GLYMPSE_INITIAL_AVATAR   = "initial_avatar";    // string uri
+    public static final String EXTRA_GLYMPSE_CONTEXT          = "context";           // string
+    public static final String EXTRA_GLYMPSE_CALLBACK_PACKAGE = "callback_package";  // string (package name)
+    public static final String EXTRA_GLYMPSE_CALLBACK_ACTION  = "callback_action";   // string
+    public static final String EXTRA_GLYMPSE_CALLBACK_URI     = "callback_uri";      // string (uri)
 
     // Extras used with ACTION_GLYMPSE_VIEW action.
-    public static final String EXTRA_GLYMPSE_CODES            = "codes";
+    public static final String EXTRA_GLYMPSE_CODES            = "codes";             // array of strings
 
     // Extras used with ACTION_GLYMPSE_CALLBACK action.
-    public static final String EXTRA_GLYMPSE_ERROR            = "error";
-    public static final String EXTRA_GLYMPSE_EVENT            = "event";
-    public static final String EXTRA_GLYMPSE_REMAINING        = "remaining";
+    public static final String EXTRA_GLYMPSE_ERROR            = "error";             // string
+    public static final String EXTRA_GLYMPSE_EVENT            = "event";             // string
+    public static final String EXTRA_GLYMPSE_REMAINING        = "remaining";         // long (milliseconds)
 
     // One of these will be sent to your status listener or activity result.
     public static final String GLYMPSE_EVENT_DONE_SENDING     = "done_sending";
