@@ -54,7 +54,8 @@ public class Common
     public static final String EXTRA_GLYMPSE_CONTEXT          = "context";           // string
     public static final String EXTRA_GLYMPSE_CALLBACK_PACKAGE = "callback_package";  // string (package name)
     public static final String EXTRA_GLYMPSE_CALLBACK_ACTION  = "callback_action";   // string
-    public static final String EXTRA_GLYMPSE_CALLBACK_URI     = "callback_uri";      // string (uri)
+    public static final String EXTRA_GLYMPSE_RETURN_URL       = "ret_url";           // string (url)
+    public static final String EXTRA_GLYMPSE_CANCEL_URL       = "ret_cancel_url";    // string (url)
 
     // Extras used with ACTION_GLYMPSE_VIEW action.
     public static final String EXTRA_GLYMPSE_CODES            = "codes";             // array of strings

@@ -161,17 +161,20 @@ public class MainActivity extends Activity implements GlympseApp.StatusListener
         // Grab the text buffer from our UI that we would like to parse for Glympse URLs.
         String buffer = ((EditText)findViewById(R.id.edit_buffer)).getText().toString();
 
+        // Check if we want to show ourself on the map.
+        boolean showSelf = (((CheckBox)findViewById(R.id.check_show_self)).isChecked());
+
         // Parse the buffer and check to see if it has any Glympse URLs that
         // contain glympse codes or group names.
         UriParser parseBufferResult = GlympseApp.parseBuffer(buffer);
-        if (parseBufferResult.hasGlympseOrGroup())
+        if (showSelf || parseBufferResult.hasGlympseOrGroup())
         {
             // Allocate a ViewGlympseParams object and tell it what we want to view.
             ViewGlympseParams viewGlympseParams = new ViewGlympseParams();
             viewGlympseParams.addAllGlympsesAndGroups(parseBufferResult);
 
             // Check if we want to show ourself on the map as well.
-            if (((CheckBox)findViewById(R.id.check_show_self)).isChecked())
+            if (showSelf)
             {
                 viewGlympseParams.setFlags(Common.FLAG_SHOW_SELF);
             }

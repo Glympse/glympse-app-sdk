@@ -71,7 +71,7 @@ public class ViewGlympseParams
      */
     protected boolean isValid()
     {
-        return (_codes.size() > 0);
+        return ((0 != (Common.FLAG_SHOW_SELF & _flags)) || (_codes.size() > 0));
     }
 
     /**
