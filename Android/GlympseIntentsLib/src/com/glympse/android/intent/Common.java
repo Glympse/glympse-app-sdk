@@ -24,8 +24,6 @@ public class Common
     public static final long FLAG_DURATION_READ_ONLY          = 0x0000000000001000L;
     public static final long FLAG_USE_ACTIVITY_RESULT         = 0x0000000010000000L;
     public static final long FLAG_ENABLE_EVENTS               = 0x0000000020000000L;
-    public static final long FLAG_APPEND_URI_QUERY            = 0x0000000040000000L;
-    public static final long FLAG_APPEND_URI_FRAGMENT         = 0x0000000080000000L;
 
     // Flags for ACTION_GLYMPSE_VIEW
     public static final long FLAG_SHOW_SELF                   = 0x0000000000000001L;
