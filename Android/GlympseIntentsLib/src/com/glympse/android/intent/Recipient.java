@@ -61,8 +61,22 @@ public class Recipient
     {
         try
         {
-            JSONObject jsonObject = new JSONObject(json);
+            populate(new JSONObject(json));
+        }
+        catch (Throwable e)
+        {
+        }
+    }
 
+    protected Recipient(JSONObject jsonObject)
+    {
+        populate(jsonObject);
+    }
+
+    protected void populate(JSONObject jsonObject)
+    {
+        if (null != jsonObject)
+        {
             _type = jsonObject.optString(RECIPIENT_TYPE, null);
             _subtype = jsonObject.optString(RECIPIENT_SUBTYPE, null);
             _brand = jsonObject.optString(RECIPIENT_BRAND, null);
@@ -70,9 +84,6 @@ public class Recipient
             _address = jsonObject.optString(RECIPIENT_ADDRESS, null);
             _createOnly = jsonObject.optBoolean(RECIPIENT_CREATE_ONLY, false);
             _url = jsonObject.optString(RECIPIENT_URL, null);
-        }
-        catch (Throwable e)
-        {
         }
     }
 
