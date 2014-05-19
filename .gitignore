@@ -1,6 +1,7 @@
 # Android
 bin/
 gen/
+build/
 
 # iOS
 xcuserdata
