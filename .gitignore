@@ -2,6 +2,7 @@
 bin/
 gen/
 build/
+*.iml
 
 # iOS
 xcuserdata
